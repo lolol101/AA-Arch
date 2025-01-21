@@ -25,10 +25,11 @@ jobs:
 
       - name: Build library from source
         run: |
+          cmake -B ./third_party/catch2/build -S ./third_party/catch2 -DBUILD_TESTING=OFF
+          sudo cmake --build ./third_party/catch2/build --target install 
           cmake . && make StringLib
           make Test
-          cmake -B build -S . -DBUILD_TESTING=OFF
-          cmake --build build --target install
+          
           
       - name: Testing library
         run: |
