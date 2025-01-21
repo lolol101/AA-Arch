@@ -27,6 +27,8 @@ jobs:
         run: |
           cmake . && make StringLib
           make Test
+          cmake -B build -S . -DBUILD_TESTING=OFF
+          cmake --build build --target install
           
       - name: Testing library
         run: |
