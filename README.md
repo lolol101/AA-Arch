@@ -1,8 +1,8 @@
 # AA-Arch
 
-### This project's goal is to implement several string-searching algorithms. 
+Contributors: Nazarov Maksim, Okorokov Nikita.
 
-The following algorithms are intended to be implemented:
+This project's goal is to implement several string-searching algorithms. The following algorithms are intended to be implemented:
 ## 1. The Aho-Korasik algorithm
 
 The algorithm searches for a set of substrings from the dictionary in a given string using finite automaton approach. All possible matches are found for each substring in a dictionary.
