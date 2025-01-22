@@ -13,8 +13,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout library code & submodules
         uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
       - name: Display Triggering Event
         run: |
@@ -25,15 +27,11 @@ jobs:
 
       - name: Build library from source
         run: |
-          cmake -B third_party/catch2/build -S third_party/catch2 -DBUILD_TESTING=OFF
-          cmake --build third_party/catch2/build --target install 
-          cmake . && make StringLib
-          make Test
-          
+          cmake . && make all
           
       - name: Testing library
         run: |
-          ./test/Test
+          ./Test
 
   deploy:
     needs: build
