@@ -10,7 +10,8 @@ include_directories(third_party/catch_2/src)
 # TODO: add flag for test compilation
 add_subdirectory(third_party/catch2/)
 
-add_library(StringLib STATIC src/algorithm.cpp)
+add_library(StringLib STATIC src/AhoCorasick.cpp)
 add_executable(Test test/test.cpp)
 
+target_link_libraries(Test PRIVATE StringLib)
 target_link_libraries(Test PRIVATE Catch2::Catch2WithMain)
