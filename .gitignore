@@ -4,5 +4,3 @@ CMakeFiles
 *Makefile
 *.cmake
 *CMakeCache.txt
-*CMakeFiles*
-test/Test
