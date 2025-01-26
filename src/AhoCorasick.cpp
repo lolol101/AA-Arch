@@ -1,81 +1,76 @@
 #include "algorithm.hpp"
 
-namespace {
-    const size_t alphabet_size = 32;
+#include <unordered_map>
 
+namespace {
     struct Node {
-        std::vector<Node*> childs = std::vector<Node*>(alphabet_size, nullptr);
-        std::vector<Node*> nextEdgeStates = std::vector<Node*>(alphabet_size, nullptr);
-        Node *parent;
-        Node *suffLink;
+        std::unordered_map<int, int> childs;
+        std::unordered_map<int, int> nextEdgeStates;
+        int parent;
+        int suffLink;
         char parentChar;
         bool isTerminal;
-        size_t stringNum;
+        int stringNum;
     };
 
-    Node* getSuffLink(Node *vertex, Node *root);
+    int getSuffLink(int cur, std::vector<Node> &vertexes);
 
-    Node* changeState(Node *vertex, int letter, Node *root) {
-        if (vertex->nextEdgeStates[letter] == nullptr) {
-            if (vertex->childs[letter] != nullptr)
-                vertex->nextEdgeStates[letter] = vertex->childs[letter];
-            else if (vertex == root)
-                vertex->nextEdgeStates[letter] = root;
+    int changeState(int cur, int letter, std::vector<Node> &vertexes) {
+        if (vertexes[cur].nextEdgeStates.find(letter) == vertexes[cur].nextEdgeStates.end()) {
+            if (vertexes[cur].childs.find(letter) == vertexes[cur].childs.end())
+                vertexes[cur].nextEdgeStates[letter] = vertexes[cur].childs[letter];
+            else if (cur == 0)
+                vertexes[cur].nextEdgeStates[letter] = 0;
             else 
-                vertex->nextEdgeStates[letter] = changeState(getSuffLink(vertex, root), letter, root);
+                vertexes[cur].nextEdgeStates[letter] = changeState(getSuffLink(cur, vertexes), letter, vertexes);
         }
-        return vertex->nextEdgeStates[letter];
+        return vertexes[cur].nextEdgeStates[letter];
     }
 
-    Node* getSuffLink(Node *vertex, Node *root) {
-        if (vertex->suffLink == nullptr) {
-            if (vertex == root || vertex->parent == root)
-                vertex->suffLink = root;
+    int getSuffLink(int cur, std::vector<Node> &vertexes) {
+        if (vertexes[cur].suffLink == -1) {
+            if (cur == 0 || vertexes[cur].parent == 0)
+                vertexes[cur].suffLink = 0;
             else
-                vertex->suffLink = changeState(getSuffLink(vertex, root), vertex->parentChar, root); 
+                vertexes[cur].suffLink = changeState(getSuffLink(cur, vertexes), vertexes[cur].parentChar, vertexes); 
         }
-        return vertex->suffLink;
+        return vertexes[cur].suffLink;
     }
 
-    void addString(const std::string *str, size_t index, Node *root) {
-        Node *cur = root;
-        root->childs = std::vector<Node*>(alphabet_size, nullptr);
-        for (size_t i = 0; i < str->size(); ++i) {
+    void addString(const std::string *str, int index, std::vector<Node>& vertexes) {
+        vertexes.emplace_back(Node());
+        int cur = vertexes.size() - 1;
+        for (int i = 0; i < str->size(); ++i) {
             int letter = (*str)[i] - 'a';
-            if (cur->childs[letter] == nullptr) {
-                cur->childs[letter] = new Node();
-                cur->childs[letter]->suffLink = nullptr;
-                cur->childs[letter]->parent = cur;
-                cur->childs[letter]->parentChar = letter;
-                cur->childs[letter]->isTerminal = false;
+            if (vertexes[cur].childs.find(letter) == vertexes[cur].childs.end()) {
+                vertexes.emplace_back();
+                vertexes.back().suffLink = -1;
+                vertexes.back().parent = cur;
+                vertexes.back().parentChar = letter;
+                vertexes.back().isTerminal = false;
+                vertexes[cur].childs[letter] = vertexes.size() - 1;
             }
-            cur = cur->childs[letter];
+            cur = vertexes[cur].childs[letter];
         }
-        cur->isTerminal = true;
-        cur->stringNum = index;
+        vertexes[cur].isTerminal = true;
+        vertexes[cur].stringNum = index;
     }
-
-    // void deleteTree(Node *root) {
-        
-    // }
 } 
 
 namespace algo {
-    std::vector<size_t> findAllStringsAhoCorasick(const std::string &text, const std::vector<std::string>& patterns) {
-        Node *root = new Node();
-        std::vector<size_t> occurences;
-        Node *cur = root;
-        for (size_t i = 0; i < patterns.size(); ++i)
-            addString(&patterns[i], i, root);
-        for (size_t i = 0; i < text.size(); ++i) {
+    std::vector<std::vector<size_t>> findAllStringsAhoCorasick(const std::string &text, const std::vector<std::string>& patterns) {
+        int cur = 0;
+        std::vector<std::vector<size_t>> occurences(patterns.size());
+        std::vector<Node> vertexes(1);
+        for (int i = 0; i < patterns.size(); ++i)
+            addString(&patterns[i], i, vertexes);
+        for (int i = 0; i < text.size(); ++i) {
             char letter = text[i] - 'a';
-            cur = changeState(cur, letter, root);
-            if (cur->isTerminal)
-                occurences.emplace_back(cur->stringNum);
-            // TODO: make return of current position in text and number of string in pair
+            cur = changeState(cur, letter, vertexes);
+            if (vertexes[cur].isTerminal) {
+                occurences[vertexes[cur].stringNum].emplace_back(i);
+            }
         }
-        // TODO: recursive delete of tree
         return occurences;
     }
 }
-
