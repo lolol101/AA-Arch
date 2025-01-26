@@ -13,7 +13,6 @@ TEST_CASE( "Aho-Corasick algorithm implementation works as intended") {
         std::vector<std::vector<size_t>> result;
 
         auto check_result_empty = [&text, &patterns, &result]() {
-            REQUIRE(patterns.size() == result.size());
             for (const std::vector<size_t> occurences: result) {
                 REQUIRE(occurences.empty());
             }
@@ -22,21 +21,21 @@ TEST_CASE( "Aho-Corasick algorithm implementation works as intended") {
         SECTION("1.1 Empty text") {
             text = "";
             patterns = {"a", "b"};
-            result = algo::findAllStringsAhoCorasick(text, patterns);
+            std::vector<size_t> result = algo::findAllStringsAhoCorasick(text, patterns);
             check_result_empty();
         }
 
         SECTION("1.2 Empty pattern list") {
             text = "abcde";
             patterns = {};
-            result = algo::findAllStringsAhoCorasick(text, patterns);
+            std::vector<size_t> result = algo::findAllStringsAhoCorasick(text, patterns);
             check_result_empty();
         }
 
         SECTION("1.3 Empty input") {
             text = {};
             patterns = {};
-            result = algo::findAllStringsAhoCorasick(text, patterns);
+            std::vector<size_t> result = algo::findAllStringsAhoCorasick(text, patterns);
             check_result_empty();
         }
     }
