@@ -1,16 +1,14 @@
-#define CATCH_CONFIG_MAIN
+#include "algorithm.hpp"
+
 #include <catch2/catch_test_macros.hpp>
 #include <string>
 #include <vector>
-
-#include "algorithm.hpp"
-#include <iostream>
 
 std::string text;
 std::vector<std::string> patterns;
 std::vector<std::vector<size_t>> result, expected;
 
-TEST_CASE("Aho-Corasick algorithm implementation correctly handles empty input") {
+TEST_CASE("Aho-Corasick algorithm implementation correctly handles empty input", "[corner][aho-corasick]") {
     const auto requireResultEmpty = []() {
         REQUIRE(patterns.size() == result.size());
         for (const std::vector<size_t> occurences: result) {
@@ -40,8 +38,7 @@ TEST_CASE("Aho-Corasick algorithm implementation correctly handles empty input")
     }
 }
 
-
-TEST_CASE("Aho-Corasick algorithm implementation correctly handles single pattern") {
+TEST_CASE("Aho-Corasick algorithm implementation correctly handles single pattern", "[corner][aho-corasick]") {
     SECTION("Empty pattern") {
         text = "aboba";
         patterns = {""};
@@ -122,7 +119,7 @@ TEST_CASE("Aho-Corasick algorithm implementation correctly handles single patter
     }
 }
 
-TEST_CASE("Aho-Corasick algorithm implementation correctly handles multiple patterns") {
+TEST_CASE("Aho-Corasick algorithm implementation correctly handles multiple patterns", "[corner][aho-corasick]") {
     SECTION("Non-overlapping patterns") {
         // non-repeating
         text = "abc";
