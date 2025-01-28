@@ -125,7 +125,7 @@ TEST_CASE("Aho-Corasick algorithm implementation correctly handles single patter
 
 TEST_CASE("Aho-Corasick algorithm implementation correctly handles multiple patterns", "[corner][aho-corasick]") {
     SECTION("Non-overlapping patterns") {
-        // non-repeating
+        // non-repeating // TODO: consistency w/ other sections
         text = "abc";
         patterns = {"a", "b", "c"};
         result = algo::findAllStringsAhoCorasick(text, patterns);
@@ -145,31 +145,33 @@ TEST_CASE("Aho-Corasick algorithm implementation correctly handles multiple patt
     }
 
     SECTION("Partially overlapping patterns") {
-        // one pattern's suffix is another pattern's prefix 
-        text = "abababa";
-        patterns = {"ab", "ba"};
-        result = algo::findAllStringsAhoCorasick(text, patterns);
-        expected = {
-            {0, 2, 4},
-            {1, 3, 5}
-            };
-        REQUIRE(result == expected);
-    }
+        SECTION("one pattern's suffix is another pattern's prefix") {
+            text = "abababa";
+            patterns = {"ab", "ba"};
+            result = algo::findAllStringsAhoCorasick(text, patterns);
+            expected = {
+                {0, 2, 4},
+                {1, 3, 5}
+                };
+            REQUIRE(result == expected);
+        }
 
-    SECTION("Fully overlapping patterns, repeated patterns") {
-        // one pattern is part of another
-        text = "ababababa";
-        patterns = {"ab", "aba"};
-        result = algo::findAllStringsAhoCorasick(text, patterns);
-        expected = {
-            {0, 2, 4, 6},
-            {0, 2, 4, 6}
-            };
-        REQUIRE(result == expected);
+        SECTION("one pattern is prefix of another") {
+            text = "ababababa";
+            patterns = {"ab", "aba"};
+            result = algo::findAllStringsAhoCorasick(text, patterns);
+            expected = {
+                {0, 2, 4, 6},
+                {0, 2, 4, 6}
+                };
+            REQUIRE(result == expected);
+        }
 
-        text = "ababababa";
-        patterns = {"aba", "ba"};
-        result = algo::findAllStringsAhoCorasick(text, patterns);
-        REQUIRE(util::isResultValid(text, patterns, result));
+        SECTION("one pattern is suffix of another") {
+            text = "ababababa";
+            patterns = {"aba", "ba"};
+            result = algo::findAllStringsAhoCorasick(text, patterns);
+            REQUIRE(util::isResultValid(text, patterns, result));
+        }
     }
 }

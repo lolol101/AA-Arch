@@ -18,32 +18,23 @@ const std::string alphabetLowercase = "abcdefghijklmnopqrstuvwxyz";
 const std::string alphabetUppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 }
 
-TEST_CASE("Aho-Corasick correctly handles something", "[stress][aho-corasick]") {
-    // alphabet = "01";
-    // SECTION("Single pattern") {
-    //     text = util::generate_string_from_alphabet(10, alphabet);
-    //     std::cerr << text << '\n';
-    // }
-
-}
-
-TEST_CASE("Aho-Corasick stress test: lowercase, large text, few short patterns", "[stress][aho-corasick]") {
-    const std::string &current_alphabet = alphabetLowercase;
-    text = util::generate_string_from_alphabet(10000, current_alphabet);
+TEST_CASE("Aho-Corasick stress test: digits, large text, few short patterns", "[stress][aho-corasick]") {
+    const std::string &current_alphabet = alphabetDigits;
+    text = util::generateStringFromAlphabet(100000, current_alphabet);
     patterns = {};
     for (size_t i = 0; i < 10; i++) {
-        patterns.emplace_back(util::generate_string_from_alphabet(10, current_alphabet));
+        patterns.emplace_back(util::generateStringFromAlphabet(5, current_alphabet));
     }
     result = algo::findAllStringsAhoCorasick(text, patterns);
     REQUIRE(util::isResultValid(text, patterns, result));
 }
 
-TEST_CASE("Aho-Corasick stress test: lowercase, large text, many short patterns", "[stress][aho-corasick]") {
-    const std::string &current_alphabet = alphabetLowercase;
-    text = util::generate_string_from_alphabet(10000, current_alphabet);
+TEST_CASE("Aho-Corasick stress test: digits, large text, many short patterns", "[stress][aho-corasick]") {
+    const std::string &current_alphabet = alphabetDigits;
+    text = util::generateStringFromAlphabet(100000, current_alphabet);
     patterns = {};
-    for (size_t i = 0; i < 1000; i++) {
-        patterns.emplace_back(util::generate_string_from_alphabet(10, current_alphabet));
+    for (size_t i = 0; i < 10000; i++) {
+        patterns.emplace_back(util::generateStringFromAlphabet(5, current_alphabet));
     }
     result = algo::findAllStringsAhoCorasick(text, patterns);
     REQUIRE(util::isResultValid(text, patterns, result));

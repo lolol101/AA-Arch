@@ -33,17 +33,20 @@ bool util::isResultValid(const std::string &text, const std::vector<std::string>
         std::vector<size_t> mockOccurences;
         for (size_t pos = 0; pos <= text.size() - pattern.size(); pos++) {
             if (pattern == std::string_view(text.data() + pos, pattern.size())) {
-                    mockOccurences.push_back(pos);
+                mockOccurences.push_back(pos);
             }
         }
-        std::cerr << "Mock occurences: ";
-        for (auto v: mockOccurences) std::cerr << v << ' ';
-        std::cerr << '\n';
-        std::cerr << "Result: ";
-        for (auto v : result[i]) {
-            std::cerr << v << ' ';
-        }
-        std::cerr << '\n';
+        // std::cerr << "Pattern: " << pattern << '\n';
+
+        // std::cerr << "Mock occurences: ";
+        // for (auto v: mockOccurences) std::cerr << v << ' ';
+        // std::cerr << '\n';
+
+        // std::cerr << "Result: ";
+        // for (auto v : result[i]) {
+        //     std::cerr << v << ' ';
+        // }
+        // std::cerr << '\n';
         if (mockOccurences != result[i]) return false;
     }
 
