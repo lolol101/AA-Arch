@@ -1,7 +1,6 @@
 #include "algorithm.hpp"
 
 #include <unordered_map>
-#include <iostream>
 
 namespace {
     struct Node {
@@ -12,6 +11,7 @@ namespace {
         char parentChar;
         bool isTerminal;
         int stringNum;
+        int deep;
     };
 
     int getSuffLink(int cur, std::vector<Node> &vertexes);
@@ -41,7 +41,8 @@ namespace {
     void addString(const std::string &str, int index, std::vector<Node>& vertexes) {
         if (str != "") {
             int cur = 0;
-            for (int i = 0; i < str.size(); ++i) {
+            int deep = 0;
+            for (int i = 0; i < str.size(); ++i, ++deep) {
                 int letter = str[i];
                 if (vertexes[cur].childs.find(letter) == vertexes[cur].childs.end()) {
                     vertexes.emplace_back();
@@ -49,28 +50,39 @@ namespace {
                     vertexes.back().parent = cur;
                     vertexes.back().parentChar = letter;
                     vertexes.back().isTerminal = false;
+                    vertexes.back().deep = 0;
                     vertexes[cur].childs[letter] = vertexes.size() - 1;
                 }
                 cur = vertexes[cur].childs[letter];
             }
             vertexes[cur].isTerminal = true;
             vertexes[cur].stringNum = index;
+            vertexes[cur].deep = deep;
+
         }
     }
 } 
 
 namespace algo {
-    std::vector<std::vector<size_t>> findAllStringsAhoCorasick(const std::string &text, const std::vector<std::string>& patterns) {
+    std::vector<std::vector<size_t>> findAllStringsAhoCorasick(const std::string &text, const std::set<std::string>& patterns) {
         int cur = 0;
         std::vector<std::vector<size_t>> occurences(patterns.size(), std::vector<size_t>());
         std::vector<Node> vertexes(1);
-        for (int i = 0; i < patterns.size(); ++i)
-            addString(patterns[i], i, vertexes);
+        auto it = patterns.begin();
+        for (int i = 0; i < patterns.size(); ++i) {
+            addString(*it, i, vertexes);
+            std::advance(it, 1);
+        }
         for (int i = 0; i < text.size(); ++i) {
             char letter = text[i];
             cur = changeState(cur, letter, vertexes);
             if (vertexes[cur].isTerminal) {
-                occurences[vertexes[cur].stringNum].emplace_back(i - patterns[vertexes[cur].stringNum].size() + 1);
+                int old_cur = cur;
+                while (vertexes[cur].isTerminal) {
+                    occurences[vertexes[cur].stringNum].emplace_back(i - vertexes[cur].deep + 1);
+                    cur = getSuffLink(cur, vertexes);
+                }
+                cur = old_cur;
             }
         }
         return occurences;

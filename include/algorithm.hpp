@@ -3,9 +3,10 @@
 
 #include <vector>
 #include <string>
+#include <set>
 
 namespace algo {
-    std::vector<std::vector<size_t>> findAllStringsAhoCorasick(const std::string &text, const std::vector<std::string>& patterns);
+    std::vector<std::vector<size_t>> findAllStringsAhoCorasick(const std::string &text, const std::set<std::string>& patterns);
 }
 
 #endif // ALGORITHM_HPP
