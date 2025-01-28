@@ -47,6 +47,7 @@ jobs:
 
       - name: Testing library
         run: |
+          chmod +x ./build/Test
           ./build/Test # TODO: -r compact? # TODO: -s for performance tests
 
   deploy:
