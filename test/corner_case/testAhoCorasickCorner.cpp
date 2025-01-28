@@ -2,13 +2,14 @@
 
 #include <catch2/catch_test_macros.hpp>
 #include <string>
+#include <set>
 #include <vector>
 
 #include "util.hpp"
 
 namespace {
 std::string text;
-std::vector<std::string> patterns;
+std::set<std::string> patterns;
 std::vector<std::vector<size_t>> result, expected;
 }
 
