@@ -45,10 +45,15 @@ jobs:
           name: build-artifacts
           path: build/
 
-      - name: Testing library
+      - name: Testing library - corner cases
         run: |
           chmod +x ./build/Test
-          ./build/Test # TODO: -r compact? # TODO: -s for performance tests
+          ./build/Test [corner] # TODO: -r compact? # TODO: -s for performance tests
+      
+      - name: Testing library - stress tests
+        run: |
+          chmod +x ./build/Test
+          ./build/Test [stress]
 
   deploy:
     needs: test
