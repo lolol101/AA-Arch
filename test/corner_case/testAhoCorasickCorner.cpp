@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 
+#include "util.hpp"
+
 namespace {
 std::string text;
 std::vector<std::string> patterns;
@@ -155,38 +157,6 @@ TEST_CASE("Aho-Corasick algorithm implementation correctly handles multiple patt
     }
 
     SECTION("Fully overlapping patterns, repeated patterns") {
-        // repeated single-char pattern
-        // text = "aabbbbcbabbac";
-        // patterns = {"a", "a", "c"};
-        // result = algo::findAllStringsAhoCorasick(text, patterns);
-        // expected = {
-        //     {0, 1, 8, 11}, 
-        //     {0, 1, 8, 11}, 
-        //     {6, 12}
-        //     };
-        // REQUIRE(result == expected);
-        // TODO: Must be dict in patterns due to Aho-Corasick requiremetns
-
-        // repeated multichar pattern
-        // text = "aaa";
-        // patterns = {"aa", "aa"};
-        // result = algo::findAllStringsAhoCorasick(text, patterns);
-        // expected = {
-        //     {0, 1},
-        //     {0, 1},
-        //     };
-        // REQUIRE(result == expected);
-        
-
-        // text = "aboaaboa";
-        // patterns = {"abo", "abo"};
-        // result = algo::findAllStringsAhoCorasick(text, patterns);
-        // expected = {
-        //     {0, 4},
-        //     {0, 4},
-        //     };
-        // REQUIRE(result == expected);
-
         // one pattern is part of another
         text = "ababababa";
         patterns = {"ab", "aba"};
@@ -196,5 +166,10 @@ TEST_CASE("Aho-Corasick algorithm implementation correctly handles multiple patt
             {0, 2, 4, 6}
             };
         REQUIRE(result == expected);
+
+        text = "ababababa";
+        patterns = {"aba", "ba"};
+        result = algo::findAllStringsAhoCorasick(text, patterns);
+        REQUIRE(util::isResultValid(text, patterns, result));
     }
 }
