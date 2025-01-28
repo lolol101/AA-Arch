@@ -24,12 +24,13 @@ std::string util::generateStringFromAlphabet(size_t length, const std::string &a
     return util::generateStringFromAlphabet(length, std::set<char>(alphabet.begin(), alphabet.end()));
 }
 
-bool util::isResultValid(const std::string &text, const std::vector<std::string> &patterns, std::vector<std::vector<size_t>> result)
+bool util::isResultValid(const std::string &text, const std::set<std::string> &patterns, std::vector<std::vector<size_t>>& result)
 {
     if (result.size() != patterns.size()) return false; // TODO: maybe exceptions?
 
+    auto it = patterns.begin(); 
     for (size_t i = 0; i < patterns.size(); i++) {
-        const std::string &pattern = patterns[i];
+        const std::string &pattern = *it;
         std::vector<size_t> mockOccurences;
         for (size_t pos = 0; pos <= text.size() - pattern.size(); pos++) {
             if (pattern == std::string_view(text.data() + pos, pattern.size())) {
@@ -48,6 +49,7 @@ bool util::isResultValid(const std::string &text, const std::vector<std::string>
         // }
         // std::cerr << '\n';
         if (mockOccurences != result[i]) return false;
+        std::advance(it, 1);
     }
 
     return true;
