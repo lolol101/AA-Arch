@@ -4,9 +4,11 @@
 #include <string>
 #include <vector>
 
+namespace {
 std::string text;
 std::vector<std::string> patterns;
 std::vector<std::vector<size_t>> result, expected;
+}
 
 TEST_CASE("Aho-Corasick algorithm implementation correctly handles empty input", "[corner][aho-corasick]") {
     const auto requireResultEmpty = []() {
