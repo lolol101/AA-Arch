@@ -29,6 +29,12 @@ jobs:
         run: |
           cmake . && make all
 
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-artifacts
+          path: build/
+
   test:
     needs: build
     runs-on: ubuntu-latest
