@@ -50,11 +50,11 @@ namespace { // unnamed namespace for hiding functions implementing algorithm
     }
 
     /// @brief Adds string from dictonary into the Bor (tree) structure.
-    /// @param dictStrings a string from dictionary.
+    /// @param pattern a string from dictionary.
     /// @param index number of a string in dictionary.
     /// @param vertexes container where the Bor (tree) is located.
     /// @note Only "addString" function is designed to change "deep" and "stringNum" variable values.
-    void addString(const std::string &dictStrings, int index, std::vector<BorTreeNode>& vertexes) {
+    void addString(const std::string &pattern, int index, std::vector<BorTreeNode>& vertexes) {
         if (dictStrings != "") {
             int cur = 0;
             int deep = 0;
@@ -78,7 +78,7 @@ namespace algo {
     /// @brief Searches for all occurrences of strings from "dictStrings" in "text" 
     /// @brief and returns the indexes of those occurrences relative to the order of the dictionary.
     /// @param text a string wich contains text.
-    /// @param dictStrings strings that are needed to be found in "text".
+    /// @param dictStrings  distinct strings that are needed to be found in "text".
     /// @param vertexes container where the Bor (tree) is located.
     std::vector<std::vector<size_t>> findAllStringsAhoCorasick(const std::string &text, const std::set<std::string>& dictStrings) {
         int cur = 0;
