@@ -8,9 +8,12 @@
 #include <vector>
 #include <string>
 
+// TODO: can use std::function instead of template
+
+namespace test::multipattern {
 
 template<typename Func>
-void test_CornerCase_EmptyInput(Func findAllStrings) {
+void test_findAllStrings_EmptyInput(Func findAllStrings) {
     std::string text;
     std::set<std::string> patterns;
     std::vector<std::vector<size_t>> result, expected;
@@ -45,7 +48,7 @@ void test_CornerCase_EmptyInput(Func findAllStrings) {
 }
 
 template<typename Func>
-void test_CornerCase_SinglePattern(Func findAllStrings) {
+void test_findAllStrings_SinglePattern(Func findAllStrings) {
     std::string text;
     std::set<std::string> patterns;
     std::vector<std::vector<size_t>> result, expected;
@@ -132,7 +135,7 @@ void test_CornerCase_SinglePattern(Func findAllStrings) {
 }
 
 template<typename Func>
-void test_CornerCase_MultiPattern(Func findAllStrings) {
+void test_findAllStrings_MultiPattern(Func findAllStrings) {
     std::string text;
     std::set<std::string> patterns;
     std::vector<std::vector<size_t>> result, expected;
@@ -187,5 +190,6 @@ void test_CornerCase_MultiPattern(Func findAllStrings) {
             REQUIRE(util::isResultValid(text, patterns, result));
         }
     }
+}
 
 }

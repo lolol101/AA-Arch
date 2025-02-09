@@ -3,14 +3,10 @@ project(AA-Arch1 VERSION 0.1.0 LANGUAGES C CXX)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 
-include_directories(../include)
-include_directories(../third_party/catch_2/src)
+include_directories(./)
 
-# TODO: add flag for test compilation
-add_subdirectory(../third_party/catch2/)
-
-add_library(StringLib STATIC ../lib/libStringLib.a)
-add_executable(Test test/test.cpp)
+add_executable(Test corner_case/testAhoCorasickCorner.cpp)
 
 target_link_libraries(Test PRIVATE StringLib)
 target_link_libraries(Test PRIVATE Catch2::Catch2WithMain)
+target_link_libraries(Test PRIVATE Util)
