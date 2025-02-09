@@ -17,13 +17,13 @@ namespace { // unnamed namespace for hiding functions implementing algorithm
             parent(parent_), suffLink(suffLink), parentChar(parentChar_), isTerminal(isTerminal_), deep(deep_), stringNum(stringNum_) {} 
     };
 
-    int getSuffLink(int cur, std::vector<BorTreeNode> &vertexes);
+    int getSuffLink(int cur, std::vector<BorTreeNode>& vertexes);
 
     /// @brief Allows to move around nodes of the Bor (tree).
     /// @param cur index of the current node in container in argument "vertexes".
     /// @param letter char symbol which represents edge name to move to the next state.
     /// @param vertexes container where the Bor (tree) is located.
-    int moveToNextState(int cur, int letter, std::vector<BorTreeNode> &vertexes) { 
+    int moveToNextState(int cur, int letter, std::vector<BorTreeNode>& vertexes) { 
         if (vertexes[cur].nextEdgeStates.find(letter) == vertexes[cur].nextEdgeStates.end()) {
             if (vertexes[cur].childs.find(letter) != vertexes[cur].childs.end())
                 vertexes[cur].nextEdgeStates[letter] = vertexes[cur].childs[letter];
@@ -39,7 +39,7 @@ namespace { // unnamed namespace for hiding functions implementing algorithm
     /// @param cur index of the current node in container in argument "vertexes".
     /// @param vertexes container where the Bor (tree) is located.
     /// @note The function works in a lazy manner so the first call has a non-constant time complexity.
-    int getSuffLink(int cur, std::vector<BorTreeNode> &vertexes) {
+    int getSuffLink(int cur, std::vector<BorTreeNode>& vertexes) {
         if (vertexes[cur].suffLink == -1) {
             if (cur == 0 || vertexes[cur].parent == 0)
                 vertexes[cur].suffLink = 0;
@@ -55,11 +55,11 @@ namespace { // unnamed namespace for hiding functions implementing algorithm
     /// @param vertexes container where the Bor (tree) is located.
     /// @note Only "addString" function is designed to change "deep" and "stringNum" variable values.
     void addString(const std::string &pattern, int index, std::vector<BorTreeNode>& vertexes) {
-        if (dictStrings != "") {
+        if (pattern != "") {
             int cur = 0;
             int deep = 0;
-            for (int i = 0; i < dictStrings.size(); ++i, ++deep) {
-                int letter = dictStrings[i];
+            for (int i = 0; i < pattern.size(); ++i, ++deep) {
+                int letter = pattern[i];
                 if (vertexes[cur].childs.find(letter) == vertexes[cur].childs.end()) {
                     vertexes.emplace_back(cur, -1, letter, false, -1, -1);
                     vertexes[cur].childs[letter] = vertexes.size() - 1;
@@ -78,17 +78,17 @@ namespace algo {
     /// @brief Searches for all occurrences of strings from "dictStrings" in "text" 
     /// @brief and returns the indexes of those occurrences relative to the order of the dictionary.
     /// @param text a string wich contains text.
-    /// @param dictStrings  distinct strings that are needed to be found in "text".
+    /// @param dictStrings distinct strings that are needed to be found in "text".
     /// @param vertexes container where the Bor (tree) is located.
-    std::vector<std::vector<size_t>> findAllStringsAhoCorasick(const std::string &text, const std::set<std::string>& dictStrings) {
+    std::vector<std::vector<size_t>> findAllStringsAhoCorasick(const std::string& text, const std::set<std::string>& patterns) {
         int cur = 0;
-        std::vector<std::vector<size_t>> occurences(dictStrings.size(), std::vector<size_t>());
+        std::vector<std::vector<size_t>> occurences(patterns.size(), std::vector<size_t>());
         std::vector<BorTreeNode> vertexes;
         vertexes.emplace_back(0, -1, -1, false, 0, -1);
 
         {
             int i = 0;
-            for (auto it = dictStrings.begin(); it != dictStrings.end(); ++it, ++i)
+            for (auto it = patterns.begin(); it != patterns.end(); ++it, ++i)
                 addString(*it, i, vertexes);
         }
 
