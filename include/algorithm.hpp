@@ -6,7 +6,8 @@
 #include <set>
 
 namespace algo {
-    std::vector<std::vector<size_t>> findAllStringsAhoCorasick(const std::string &text, const std::set<std::string>& patterns);
+    std::vector<std::vector<size_t>> findAllStringsAhoCorasick(const std::string& text, const std::set<std::string>& patterns);
+    std::vector<size_t> findStringKnuthMorrisPratt(const std::string &text, const std::string& pattern);
 }
 
 #endif // ALGORITHM_HPP

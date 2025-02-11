@@ -14,11 +14,17 @@ add_subdirectory(third_party/catch2/)
 add_library(StringLib STATIC src/AhoCorasick.cpp)
 add_executable(Test
             test/corner_case/testAhoCorasickCorner.cpp
-            test/stress/testAhoCorasickStress.cpp
+            test/random_case/testAhoCorasickStress.cpp
             )
+
+add_executable(Benchmark benchmark/benchmark.cpp)
 
 add_library(Util STATIC util/util.cpp)
 
 target_link_libraries(Test PRIVATE StringLib)
 target_link_libraries(Test PRIVATE Catch2::Catch2WithMain)
 target_link_libraries(Test PRIVATE Util)
+
+target_link_libraries(Benchmark PRIVATE StringLib)
+target_link_libraries(Benchmark PRIVATE Catch2::Catch2WithMain)
+target_link_libraries(Benchmark PRIVATE Util)
