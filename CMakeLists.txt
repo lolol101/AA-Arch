@@ -11,20 +11,17 @@ include_directories(third_party/catch_2/src)
 # TODO: add flag for test compilation
 add_subdirectory(third_party/catch2/)
 
-add_library(StringLib STATIC src/AhoCorasick.cpp)
-add_executable(Test
-            test/corner_case/testAhoCorasickCorner.cpp
-            test/random_case/testAhoCorasickStress.cpp
-            )
-
-add_executable(Benchmark benchmark/benchmark.cpp)
+add_library(StringLib STATIC 
+    src/AhoCorasick.cpp
+    src/KnuthMorrisPratt.cpp
+    src/RabinCarp.cpp
+    )
 
 add_library(Util STATIC util/util.cpp)
 
-target_link_libraries(Test PRIVATE StringLib)
-target_link_libraries(Test PRIVATE Catch2::Catch2WithMain)
-target_link_libraries(Test PRIVATE Util)
+add_subdirectory(test)
 
+add_executable(Benchmark benchmark/benchmark.cpp)
 target_link_libraries(Benchmark PRIVATE StringLib)
 target_link_libraries(Benchmark PRIVATE Catch2::Catch2WithMain)
 target_link_libraries(Benchmark PRIVATE Util)
