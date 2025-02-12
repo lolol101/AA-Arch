@@ -1,4 +1,4 @@
-#include "algorithm.hpp"
+#include "AhoCorasick.hpp"
 
 #include "corner_case.hpp"
 

@@ -1,4 +1,4 @@
-#include "algorithm.hpp"
+#include "KnuthMorrisPratt.hpp"
 
 #include <catch2/catch_test_macros.hpp>
 

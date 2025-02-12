@@ -1,4 +1,4 @@
-#include "algorithm.hpp"
+#include "KnuthMorrisPratt.hpp"
 
 #include "corner_case.hpp"
 

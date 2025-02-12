@@ -1,4 +1,4 @@
-#include "algorithm.hpp"
+#include "RabinCarp.hpp"
 
 #include "corner_case.hpp"
 

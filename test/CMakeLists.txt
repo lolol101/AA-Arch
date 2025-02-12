@@ -13,6 +13,8 @@ add_executable(Test
     test_suites/random/testAhoCorasickRandom.cpp
     test_suites/random/test_KnuthMorrisPratt_Random.cpp
     test_suites/random/test_RabinCarp_Random.cpp
+    
+    test_suites/unit/testAhoCorasickUnit.cpp
 
     template/src/corner_case.cpp
     template/src/random_test.cpp

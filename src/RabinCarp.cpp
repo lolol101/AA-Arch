@@ -1,16 +1,15 @@
-#include "algorithm.hpp"
+#include "RabinCarp.hpp"
 
 #include <string>
 #include <string_view>
 #include <vector>
 #include <cstdint>
 
-namespace {
+namespace algo::util::rabincarp {
     // Constants for hashing
     const uint64_t PRIME = 1000000007;
     const uint64_t BASE = 256; // number of possible characters
 
-    /// @brief Helper function to compute hash of the string.
     uint64_t computeHash(const std::string_view &s) {
         uint64_t hash = 0;
         for (char c : s) {
@@ -19,7 +18,6 @@ namespace {
         return hash;
     }
 
-    /// @brief Helper function to precompute powers of BASE modulo PRIME. 
     std::vector<uint64_t> precomputePowers(size_t stringLength) {
         std::vector<uint64_t> powers(stringLength, 1);
         for (size_t i = 1; i < stringLength; ++i) {
@@ -34,6 +32,8 @@ namespace algo {
     /// @param text string to search for substring in.
     /// @param pattern a string which is needed to be found in text.
     std::vector<size_t> findStringRabinCarp(const std::string &text, const std::string& pattern) {
+        using namespace util::rabincarp;
+
         std::vector<size_t> result;
 
         if (pattern.empty() || text.empty() || pattern.size() > text.size()) {
@@ -58,9 +58,6 @@ namespace algo {
             if (i < n - m) {
                 textHash = (textHash - static_cast<uint64_t>(text[i]) * powers[m - 1] % PRIME + PRIME) % PRIME;
                 textHash = (textHash * BASE + static_cast<uint64_t>(text[i + m])) % PRIME;
-                // if (textHash < 0) {
-                //     textHash += PRIME; // so hash is non-negative
-                // }
             }
         }
 
