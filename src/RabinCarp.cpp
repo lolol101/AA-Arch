@@ -51,17 +51,16 @@ namespace algo {
         std::vector<uint64_t> powers = precomputePowers(m);
 
         for (size_t i = 0; i <= n - m; ++i) {
-            if (textHash == patternHash) {
-                if (textView.substr(i, m) == patternView) {
-                    result.push_back(i);
-                }
+            if (textHash == patternHash && textView.substr(i, m) == patternView) {
+                result.push_back(i);
             }
 
             if (i < n - m) {
-                textHash = ((textHash - static_cast<uint64_t>(text[i]) * powers[m - 1]) * BASE + static_cast<uint64_t>(text[i + m])) % PRIME;
-                if (textHash < 0) {
-                    textHash += PRIME; // so hash is non-negative
-                }
+                textHash = (textHash - static_cast<uint64_t>(text[i]) * powers[m - 1] % PRIME + PRIME) % PRIME;
+                textHash = (textHash * BASE + static_cast<uint64_t>(text[i + m])) % PRIME;
+                // if (textHash < 0) {
+                //     textHash += PRIME; // so hash is non-negative
+                // }
             }
         }
 
