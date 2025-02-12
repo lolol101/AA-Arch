@@ -9,6 +9,7 @@
 #include <string>
 
 // TODO: can use std::function instead of template
+// typedef std::function<std::vector<std::vector<size_t>>(const std::string &, const std::set<std::string>&)> testedFunction_t;
 
 namespace test::multipattern {
 
