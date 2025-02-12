@@ -7,10 +7,10 @@
 
 namespace algo::util::rabincarp {
     /// @brief Helper function to compute hash of the string.
-    uint64_t computeHash(const std::string_view &s);
+    uint64_t computeHash(const std::string_view &s, const uint64_t prime, const uint64_t base);
 
     /// @brief Helper function to precompute powers of BASE modulo PRIME. 
-    std::vector<uint64_t> precomputePowers(size_t stringLength);
+    std::vector<uint64_t> precomputePowers(size_t stringLength, const uint64_t prime, const uint64_t base);
 }
 
 namespace algo {

@@ -8,20 +8,20 @@
 namespace algo::util::rabincarp {
     // Constants for hashing
     const uint64_t PRIME = 1000000007;
-    const uint64_t BASE = 256; // number of possible characters
+    const uint64_t BASE = 256; // number of possible characters // TODO: can hide them in unnamed namespace if needed
 
-    uint64_t computeHash(const std::string_view &s) {
+    uint64_t computeHash(const std::string_view &s, const uint64_t prime, const uint64_t base) {
         uint64_t hash = 0;
         for (char c : s) {
-            hash = (hash * BASE + static_cast<uint64_t>(c)) % PRIME;
+            hash = (hash * base + static_cast<uint64_t>(c)) % prime;
         }
         return hash;
     }
 
-    std::vector<uint64_t> precomputePowers(size_t stringLength) {
+    std::vector<uint64_t> precomputePowers(size_t stringLength, const uint64_t prime, const uint64_t base) {
         std::vector<uint64_t> powers(stringLength, 1);
         for (size_t i = 1; i < stringLength; ++i) {
-            powers[i] = (powers[i - 1] * BASE) % PRIME;
+            powers[i] = (powers[i - 1] * base) % prime;
         }
         return powers;
     }
@@ -46,9 +46,9 @@ namespace algo {
         std::string_view textView(text);
         std::string_view patternView(pattern);
 
-        uint64_t patternHash = computeHash(patternView);
-        uint64_t textHash = computeHash(textView.substr(0, m));
-        std::vector<uint64_t> powers = precomputePowers(m);
+        uint64_t patternHash = computeHash(patternView, PRIME, BASE);
+        uint64_t textHash = computeHash(textView.substr(0, m), PRIME, BASE);
+        std::vector<uint64_t> powers = precomputePowers(m, PRIME, BASE);
 
         for (size_t i = 0; i <= n - m; ++i) {
             if (textHash == patternHash && textView.substr(i, m) == patternView) {
