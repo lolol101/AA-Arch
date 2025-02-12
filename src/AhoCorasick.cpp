@@ -1,30 +1,12 @@
-#include "algorithm.hpp"
+#include "AhoCorasick.hpp"
 
 #include <unordered_map>
 
-namespace { // unnamed namespace for hiding functions implementing algorithm 
-    struct BorTreeNode {
-        std::unordered_map<int, int> childs;
-        std::unordered_map<int, int> nextEdgeStates;
-        int parent;
-        int suffLink;
-        char parentChar;
-        bool isTerminal;
-        int deep;
-        int stringNum;
-
-        /* 
-        Initialization/default values for Node variables. 
-        Next values represent state of Node which is not connected to the tree.
-        */
-        BorTreeNode() :
+namespace algo::util::ahocorasick {
+    BorTreeNode::BorTreeNode() :
             parent(0), suffLink(-1), parentChar(-1), isTerminal(false), deep(0), stringNum(-1) {}
-            
-        BorTreeNode(int parent_, char parentChar_) :
+    BorTreeNode::BorTreeNode(int parent_, char parentChar_) :
             parent(parent_), suffLink(-1), parentChar(parentChar_), isTerminal(false), deep(0), stringNum(-1) {}
-    };
-
-    int getSuffLink(int cur, std::vector<BorTreeNode>& vertexes);
 
     /// @brief Allows to move around nodes of the Bor (tree).
     /// @param cur index of the current node in container in argument "vertexes".
@@ -78,7 +60,7 @@ namespace { // unnamed namespace for hiding functions implementing algorithm
             vertexes[cur].stringNum = index;
         }
     }
-} 
+}
 
 namespace algo {
 
@@ -88,6 +70,8 @@ namespace algo {
     /// @param dictStrings distinct strings that are needed to be found in "text".
     /// @param vertexes container where the Bor (tree) is located.
     std::vector<std::vector<size_t>> findAllStringsAhoCorasick(const std::string& text, const std::set<std::string>& patterns) {
+        using namespace algo::util::ahocorasick;
+        
         int cur = 0;
         std::vector<std::vector<size_t>> occurences(patterns.size(), std::vector<size_t>());
         std::vector<BorTreeNode> vertexes;
