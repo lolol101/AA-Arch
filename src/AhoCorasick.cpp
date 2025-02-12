@@ -13,7 +13,10 @@ namespace { // unnamed namespace for hiding functions implementing algorithm
         int deep;
         int stringNum;
 
-        // Initialization/default values for Node variables 
+        /* 
+        Initialization/default values for Node variables. 
+        Next values represent state of Node which is not connected to the tree.
+        */
         BorTreeNode() :
             parent(0), suffLink(-1), parentChar(-1), isTerminal(false), deep(0), stringNum(-1) {}
             
