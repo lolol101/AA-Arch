@@ -13,5 +13,7 @@ std::string generateStringFromAlphabet(size_t length, const std::set<char> &alph
 
 std::string generateStringFromAlphabet(size_t length, const std::string &alphabet);
 
-bool isResultValid(const std::string &text, const std::set<std::string>& patterns, std::vector<std::vector<size_t>>& result);
+bool isResultValid_SinglePattern(const std::string &text, const std::string &pattern, std::vector<size_t>& result);
+
+bool isResultValid_MultiPattern(const std::string &text, const std::set<std::string> &patterns, std::vector<std::vector<size_t>>& result);
 }
