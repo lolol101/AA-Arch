@@ -27,6 +27,7 @@ namespace algo::util::ahocorasick {
     /// @brief Calculates index of node representing the longest suffix of current string.
     /// @param cur index of the current node in container in argument "vertexes".
     /// @param vertexes container where the Bor (tree) is located.
+    /// @returns // TODO:
     /// @note The function works in a lazy manner so the first call has a non-constant time complexity.
     int getSuffLink(int cur, std::vector<BorTreeNode>& vertexes) {
         if (vertexes[cur].suffLink == -1) {
