@@ -24,6 +24,6 @@ void test_findAllStrings_RandomFill(
         patterns.insert(util::generateStringFromAlphabet(patternLength, alphabet));
     }
 
-    std::vector<std::vector<size_t>> result = algo::findAllStringsAhoCorasick(text, patterns);
+    std::vector<std::vector<size_t>> result = findAllStrings(text, patterns);
     REQUIRE(util::isResultValid(text, patterns, result));
 }
