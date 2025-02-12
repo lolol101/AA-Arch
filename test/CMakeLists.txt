@@ -8,6 +8,7 @@ include_directories(./)
 add_executable(Test 
     test_suites/corner_case/testAhoCorasickCorner.cpp
     test_suites/random/testAhoCorasickRandom.cpp
+    test_suites/unit/testAhoCorasickUnit.cpp
     )
 
 target_link_libraries(Test PRIVATE StringLib)

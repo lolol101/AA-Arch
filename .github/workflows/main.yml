@@ -45,6 +45,11 @@ jobs:
           name: build-artifacts
           path: build/
 
+      - name: Testing library - unit tests
+        run: |
+          chmod +x ./build/Test
+          ./build/Test [unit]
+    
       - name: Testing library - corner cases
         run: |
           chmod +x ./build/Test
