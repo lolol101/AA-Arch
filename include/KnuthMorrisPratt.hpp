@@ -1,7 +1,5 @@
 #pragma once
 
-#include "KnuthMorrisPratt.hpp"
-
 #include <string>
 #include <vector>
 

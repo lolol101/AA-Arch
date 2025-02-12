@@ -1,6 +1,11 @@
 #include "KnuthMorrisPratt.hpp"
 
 void algo::util::kmp::calculateLPSArray(const std::string& pattern, std::vector<size_t> &lps) {
+    if (pattern.length() == 0) {
+        lps.clear();
+        return;
+    }
+    lps.resize(pattern.length());
     lps[0] = 0;
 
     for (int i = 1, matchSize = 0; i < pattern.size();) {
