@@ -17,11 +17,11 @@ void test_findAllStrings_RandomFill(
     const unsigned int patternCount,
     const unsigned long patternLength
 ) {
-    std::string text = util::generateStringFromAlphabet(100000, alphabet);
+    std::string text = util::generateStringFromAlphabet(textLength, alphabet);
     
     std::set<std::string> patterns;
-    for (size_t i = 0; i < 10; i++) {
-        patterns.insert(util::generateStringFromAlphabet(5, alphabet));
+    for (size_t i = 0; i < patternCount; i++) {
+        patterns.insert(util::generateStringFromAlphabet(patternLength, alphabet));
     }
 
     std::vector<std::vector<size_t>> result = algo::findAllStringsAhoCorasick(text, patterns);

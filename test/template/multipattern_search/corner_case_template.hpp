@@ -13,6 +13,7 @@
 
 namespace test::multipattern {
 
+/// @brief Runs corner case tests for multipattern search function in which not all required input is present.
 template<typename Func>
 void test_findAllStrings_EmptyInput(Func findAllStrings) {
     std::string text;
@@ -26,21 +27,24 @@ void test_findAllStrings_EmptyInput(Func findAllStrings) {
         }
     };
 
-    SECTION("Empty text") {
+    SECTION("Handles case when no text is provided") {
+        // Verify behaviour when only text is missing
         text = "";
         patterns = {"a", "b"};
         result = findAllStrings(text, patterns);
         requireResultEmpty();
     }
 
-    SECTION("Empty pattern list") {
+    SECTION("Handles empty pattern list") {
+        // Verify behaviour when only patterns are missing
         text = "abcde";
         patterns = {};
         result = findAllStrings(text, patterns);
         requireResultEmpty();
     }
 
-    SECTION("Empty input") {
+    SECTION("Handles fully empty input") {
+        // Verify behaviour when both text and patterns are missing
         text = {};
         patterns = {};
         result = findAllStrings(text, patterns);
@@ -48,13 +52,16 @@ void test_findAllStrings_EmptyInput(Func findAllStrings) {
     }
 }
 
+
+/// @brief Runs corner case tests for a multipattern search function in case where only one pattern is provided.
 template<typename Func>
 void test_findAllStrings_SinglePattern(Func findAllStrings) {
     std::string text;
     std::set<std::string> patterns;
     std::vector<std::vector<size_t>> result, expected;
 
-    SECTION("Empty pattern") {
+    SECTION("Handles empty pattern") {
+        // Verify behavior when the pattern is an empty string
         text = "aboba";
         patterns = {""};
         result = findAllStrings(text, patterns);
@@ -62,46 +69,42 @@ void test_findAllStrings_SinglePattern(Func findAllStrings) {
         REQUIRE(result == expected);
     }
 
-    SECTION("Single Character") {
-        SECTION("Appearing single time") {
+    SECTION("Handles single-character patterns") {
+        SECTION("Single occurrence of the character") {
+            // Test cases where the character appears once in the text
             text = "abobi";
-
-            // at the start
             patterns = {"a"};
             result = findAllStrings(text, patterns);
             expected = {{0}};
             REQUIRE(result == expected);
 
-            // in the middle
             patterns = {"o"};
             result = findAllStrings(text, patterns);
             expected = {{2}};
             REQUIRE(result == expected);
 
-            // at the end
             patterns = {"i"};
             result = findAllStrings(text, patterns);
             expected = {{4}};
             REQUIRE(result == expected);
         }
 
-        SECTION("Appearing multiple times") {
+        SECTION("Multiple occurrences of the character") {
+            // Test cases where the character appears multiple times
             text = "abaobbi";
-
-            // apart
             patterns = {"a"};
             result = findAllStrings(text, patterns);
             expected = {{0, 2}};
             REQUIRE(result == expected);
 
-            // near each other
             patterns = {"b"};
             result = findAllStrings(text, patterns);
             expected = {{1, 4, 5}};
             REQUIRE(result == expected);
         }
 
-        SECTION("Not appearing") {
+        SECTION("Character not present in the text") {
+            // Verify behavior when the character does not appear in the text
             text = "aboba";
             patterns = {"u"};
             result = findAllStrings(text, patterns);
@@ -110,15 +113,18 @@ void test_findAllStrings_SinglePattern(Func findAllStrings) {
         }
     }
 
-    SECTION("Multiple character") {
-        SECTION("Unique") {
+    SECTION("Handles multi-character patterns") {
+        SECTION("Unique pattern in the text") {
+            // Test cases where the pattern appears uniquely
             text = "abcdefghabcdef";
             patterns = {"cde"};
             result = findAllStrings(text, patterns);
             expected = {{2, 10}};
             REQUIRE(result == expected);
         }
-        SECTION("Repeated") {
+
+        SECTION("Repeated pattern in the text") {
+            // Test cases where the pattern appears multiple times
             text = "aaabbbcccabb";
             patterns = {"bbb"};
             result = findAllStrings(text, patterns);
@@ -132,63 +138,70 @@ void test_findAllStrings_SinglePattern(Func findAllStrings) {
             REQUIRE(result == expected);
         }
     }
-
 }
 
+/// @brief Runs corner case tests for a multipattern search function in case where only one pattern is provided.
 template<typename Func>
 void test_findAllStrings_MultiPattern(Func findAllStrings) {
     std::string text;
     std::set<std::string> patterns;
     std::vector<std::vector<size_t>> result, expected;
 
-    SECTION("Non-overlapping patterns") {
-        // non-repeating // TODO: consistency w/ other sections
-        text = "abc";
-        patterns = {"a", "b", "c"};
-        result = findAllStrings(text, patterns);
-        expected = {{0}, {1}, {2}};
-        REQUIRE(result == expected);
+    SECTION("Handles non-overlapping patterns") {
+        SECTION("Non-repeating patterns") {
+            // Verify behavior when patterns do not overlap and appear only once in the text
+            text = "abc";
+            patterns = {"a", "b", "c"};
+            result = findAllStrings(text, patterns);
+            expected = {{0}, {1}, {2}};
+            REQUIRE(result == expected);
+        }
 
-        // repeating
-        text = "aabbbbcbabbac";
-        patterns = {"a", "b", "c"};
-        result = findAllStrings(text, patterns);
-        expected = {
-            {0, 1, 8, 11}, 
-            {2, 3, 4, 5, 7, 9, 10}, 
-            {6, 12}
+        SECTION("Repeating patterns") {
+            // Verify behavior when patterns do not overlap but appear multiple times in the text
+            text = "aabbbbcbabbac";
+            patterns = {"a", "b", "c"};
+            result = findAllStrings(text, patterns);
+            expected = {
+                {0, 1, 8, 11},  // Positions of 'a'
+                {2, 3, 4, 5, 7, 9, 10},  // Positions of 'b'
+                {6, 12}  // Positions of 'c'
             };
-        REQUIRE(result == expected);
+            REQUIRE(result == expected);
+        }
     }
 
-    SECTION("Partially overlapping patterns") {
-        SECTION("one pattern's suffix is another pattern's prefix") {
+    SECTION("Handles partially overlapping patterns") {
+        SECTION("One pattern's suffix is another pattern's prefix") {
+            // Verify behavior when one pattern's suffix matches another pattern's prefix
             text = "abababa";
             patterns = {"ab", "ba"};
             result = findAllStrings(text, patterns);
             expected = {
-                {0, 2, 4},
-                {1, 3, 5}
-                };
+                {0, 2, 4},  // Positions of 'ab'
+                {1, 3, 5}   // Positions of 'ba'
+            };
             REQUIRE(result == expected);
         }
 
-        SECTION("one pattern is prefix of another") {
+        SECTION("One pattern is a prefix of another") {
+            // Verify behavior when one pattern is a prefix of another
             text = "ababababa";
             patterns = {"ab", "aba"};
             result = findAllStrings(text, patterns);
             expected = {
-                {0, 2, 4, 6},
-                {0, 2, 4, 6}
-                };
+                {0, 2, 4, 6},  // Positions of 'ab'
+                {0, 2, 4, 6}   // Positions of 'aba' (overlaps with 'ab')
+            };
             REQUIRE(result == expected);
         }
 
-        SECTION("one pattern is suffix of another") {
+        SECTION("One pattern is a suffix of another") {
+            // Verify behavior when one pattern is a suffix of another
             text = "ababababa";
             patterns = {"aba", "ba"};
             result = findAllStrings(text, patterns);
-            REQUIRE(util::isResultValid(text, patterns, result));
+            REQUIRE(util::isResultValid(text, patterns, result)); // Use utility function to validate results
         }
     }
 }

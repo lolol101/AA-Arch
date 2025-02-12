@@ -11,10 +11,10 @@ TEST_CASE("Aho-Corasick algorithm implementation correctly handles empty input",
     test::multipattern::test_findAllStrings_EmptyInput(algo::findAllStringsAhoCorasick);
 }
 
-TEST_CASE("Aho-Corasick algorithm implementation correctly handles single pattern", "[corner][aho-corasick]") {
+TEST_CASE("Aho-Corasick algorithm implementation correctly handles single-pattern inputs", "[corner][aho-corasick]") {
     test::multipattern::test_findAllStrings_SinglePattern(algo::findAllStringsAhoCorasick);
 }
 
-TEST_CASE("Aho-Corasick algorithm implementation correctly handles multiple patterns", "[corner][aho-corasick]") {
+TEST_CASE("Aho-Corasick algorithm implementation correctly handles multi-pattern inputs", "[corner][aho-corasick]") {
     test::multipattern::test_findAllStrings_MultiPattern(algo::findAllStringsAhoCorasick);
 }
