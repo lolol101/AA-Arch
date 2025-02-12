@@ -107,13 +107,31 @@ namespace test::singlepattern {
                 text = "aaabbbcccabb";
                 pattern = {"bbb"};
                 result = findSingleString(text, pattern);
-                expected = {{3}};
+                expected = {3};
                 REQUIRE(result == expected);
     
                 text = "aaabbbbcccabbb";
                 pattern = {"bbb"};
                 result = findSingleString(text, pattern);
-                expected = {{3, 4, 11}};
+                expected = {3, 4, 11};
+                REQUIRE(result == expected);
+
+                text = "abobabebabuubbaabooob";
+                pattern = "ab";
+                result = findSingleString(text, pattern);
+                expected = {0, 4, 8, 15};
+                REQUIRE(result == expected);
+
+                text = "1111111";
+                pattern = "111111";
+                result = findSingleString(text, pattern);
+                expected = {0, 1};
+                REQUIRE(result == expected);
+
+                text = "0100011111001110101111111101010001111110100000001000000111010110010001111100001000010011111010110011110";
+                pattern = "10001";
+                result = findSingleString(text, pattern);
+                expected = {1, 29, 65};
                 REQUIRE(result == expected);
             }
         }
