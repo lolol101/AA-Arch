@@ -7,6 +7,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
 include_directories(include)
 include_directories(util)
 include_directories(third_party/catch_2/src)
+include_directories(third_party/json/include)
 
 # TODO: add flag for test compilation
 add_subdirectory(third_party/catch2/)
@@ -20,8 +21,4 @@ add_library(StringLib STATIC
 add_library(Util STATIC util/util.cpp)
 
 add_subdirectory(test)
-
-add_executable(Benchmark benchmark/benchmark.cpp)
-target_link_libraries(Benchmark PRIVATE StringLib)
-target_link_libraries(Benchmark PRIVATE Catch2::Catch2WithMain)
-target_link_libraries(Benchmark PRIVATE Util)
+add_subdirectory(benchmark)

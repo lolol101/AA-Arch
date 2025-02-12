@@ -3,6 +3,10 @@
 #include <unordered_map>
 
 namespace algo::util::ahocorasick {
+    /* 
+    Initialization/default values for Node variables. 
+    Next values represent state of Node which is not connected to the tree.
+    */
     BorTreeNode::BorTreeNode() :
             parent(0), suffLink(-1), parentChar(-1), isTerminal(false), deep(0), stringNum(-1) {}
     BorTreeNode::BorTreeNode(int parent_, char parentChar_) :
