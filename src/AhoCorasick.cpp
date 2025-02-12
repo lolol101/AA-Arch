@@ -1,23 +1,12 @@
-#include "algorithm.hpp"
+#include "AhoCorasick.hpp"
 
 #include <unordered_map>
 
-namespace { // unnamed namespace for hiding functions implementing algorithm 
-    struct BorTreeNode {
-        std::unordered_map<int, int> childs;
-        std::unordered_map<int, int> nextEdgeStates;
-        int parent;
-        int suffLink;
-        char parentChar;
-        bool isTerminal;
-        int deep;
-        int stringNum;
-
-        BorTreeNode(int parent_, int suffLink, char parentChar_, bool isTerminal_, int deep_=-1, int stringNum_=-1) :
-            parent(parent_), suffLink(suffLink), parentChar(parentChar_), isTerminal(isTerminal_), deep(deep_), stringNum(stringNum_) {} 
-    };
-
-    int getSuffLink(int cur, std::vector<BorTreeNode>& vertexes);
+namespace algo::util::ahocorasick {
+    BorTreeNode::BorTreeNode() :
+            parent(0), suffLink(-1), parentChar(-1), isTerminal(false), deep(0), stringNum(-1) {}
+    BorTreeNode::BorTreeNode(int parent_, char parentChar_) :
+            parent(parent_), suffLink(-1), parentChar(parentChar_), isTerminal(false), deep(0), stringNum(-1) {}
 
     /// @brief Allows to move around nodes of the Bor (tree).
     /// @param cur index of the current node in container in argument "vertexes".
@@ -38,6 +27,7 @@ namespace { // unnamed namespace for hiding functions implementing algorithm
     /// @brief Calculates index of node representing the longest suffix of current string.
     /// @param cur index of the current node in container in argument "vertexes".
     /// @param vertexes container where the Bor (tree) is located.
+    /// @returns // TODO:
     /// @note The function works in a lazy manner so the first call has a non-constant time complexity.
     int getSuffLink(int cur, std::vector<BorTreeNode>& vertexes) {
         if (vertexes[cur].suffLink == -1) {
@@ -61,7 +51,7 @@ namespace { // unnamed namespace for hiding functions implementing algorithm
             for (int i = 0; i < pattern.size(); ++i, ++deep) {
                 int letter = pattern[i];
                 if (vertexes[cur].childs.find(letter) == vertexes[cur].childs.end()) {
-                    vertexes.emplace_back(cur, -1, letter, false, -1, -1);
+                    vertexes.emplace_back(cur, letter);
                     vertexes[cur].childs[letter] = vertexes.size() - 1;
                 }
                 cur = vertexes[cur].childs[letter];
@@ -71,7 +61,7 @@ namespace { // unnamed namespace for hiding functions implementing algorithm
             vertexes[cur].stringNum = index;
         }
     }
-} 
+}
 
 namespace algo {
 
@@ -81,10 +71,12 @@ namespace algo {
     /// @param dictStrings distinct strings that are needed to be found in "text".
     /// @param vertexes container where the Bor (tree) is located.
     std::vector<std::vector<size_t>> findAllStringsAhoCorasick(const std::string& text, const std::set<std::string>& patterns) {
+        using namespace algo::util::ahocorasick;
+        
         int cur = 0;
         std::vector<std::vector<size_t>> occurences(patterns.size(), std::vector<size_t>());
         std::vector<BorTreeNode> vertexes;
-        vertexes.emplace_back(0, -1, -1, false, 0, -1);
+        vertexes.emplace_back();
 
         {
             int i = 0;
