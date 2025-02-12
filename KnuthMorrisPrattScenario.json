@@ -1,0 +1,11 @@
+{
+    "benchmark_name": "KnuthMorrisPrattScenario",
+    "durations": [
+        14.362720338
+    ],
+    "max": 14.362720338,
+    "mean": 14.362720338,
+    "median": 14.362720338,
+    "min": 14.362720338,
+    "stddev": 0.0
+}
