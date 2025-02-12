@@ -13,8 +13,12 @@ namespace { // unnamed namespace for hiding functions implementing algorithm
         int deep;
         int stringNum;
 
-        BorTreeNode(int parent_, int suffLink, char parentChar_, bool isTerminal_, int deep_=-1, int stringNum_=-1) :
-            parent(parent_), suffLink(suffLink), parentChar(parentChar_), isTerminal(isTerminal_), deep(deep_), stringNum(stringNum_) {} 
+        // Initialization/default values for Node variables 
+        BorTreeNode() :
+            parent(0), suffLink(-1), parentChar(-1), isTerminal(false), deep(0), stringNum(-1) {}
+            
+        BorTreeNode(int parent_, char parentChar_) :
+            parent(parent_), suffLink(-1), parentChar(parentChar_), isTerminal(false), deep(0), stringNum(-1) {}
     };
 
     int getSuffLink(int cur, std::vector<BorTreeNode>& vertexes);
@@ -61,7 +65,7 @@ namespace { // unnamed namespace for hiding functions implementing algorithm
             for (int i = 0; i < pattern.size(); ++i, ++deep) {
                 int letter = pattern[i];
                 if (vertexes[cur].childs.find(letter) == vertexes[cur].childs.end()) {
-                    vertexes.emplace_back(cur, -1, letter, false, -1, -1);
+                    vertexes.emplace_back(cur, letter);
                     vertexes[cur].childs[letter] = vertexes.size() - 1;
                 }
                 cur = vertexes[cur].childs[letter];
@@ -84,7 +88,7 @@ namespace algo {
         int cur = 0;
         std::vector<std::vector<size_t>> occurences(patterns.size(), std::vector<size_t>());
         std::vector<BorTreeNode> vertexes;
-        vertexes.emplace_back(0, -1, -1, false, 0, -1);
+        vertexes.emplace_back();
 
         {
             int i = 0;
