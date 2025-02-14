@@ -72,7 +72,8 @@ jobs:
 
       - name: Benchmark
         run: |
-          ./build/Benchmark --benchmark_format=json > ../benchmark/results.json
+          chmod +x ./build/Benchmark
+          ./build/Benchmark --benchmark_format=json > ./benchmark/results.json
 
   deploy:
     needs: test
