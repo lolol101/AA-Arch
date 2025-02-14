@@ -9,7 +9,7 @@
 TEST_CASE("Knuth-Morris-Pratt stress test: bits, large text, few short patterns", "[stress][kmp]") {
     test::singlepattern::test_findSingleString_RandomFill(
         algo::findStringKnuthMorrisPratt,
-        test::util::alphabetBits,
+        util::alphabetBits,
         100'000,
         5,
         10
@@ -19,7 +19,7 @@ TEST_CASE("Knuth-Morris-Pratt stress test: bits, large text, few short patterns"
 TEST_CASE("Knuth-Morris-Pratt stress test: digits, large text, many short patterns", "[stress][kmp]") {
     test::singlepattern::test_findSingleString_RandomFill(
         algo::findStringKnuthMorrisPratt,
-        test::util::alphabetDigits,
+        util::alphabetDigits,
         100'000,
         1,
         5

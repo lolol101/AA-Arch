@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.2.0)
 project(AA-Arch1 VERSION 0.1.0 LANGUAGES C CXX)
 
-include_directories(./template/include ./util)
+include_directories(./template/include ../util)
 
 add_executable(Test 
     test_suites/corner_case/testAhoCorasickCorner.cpp

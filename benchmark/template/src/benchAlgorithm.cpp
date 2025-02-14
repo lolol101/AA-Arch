@@ -1,8 +1,6 @@
-#define CATCH_CONFIG_RUNNER
-
 #include <benchAlgorithm.hpp>
 
-void benchmark::singlepattern::benchSinglePatternAlgo(
+void benchmark::runSinglePatternAlgo(
     AlgoFuncType1 findString, 
     const std::string& alphabet,
     unsigned textSize,
@@ -11,12 +9,10 @@ void benchmark::singlepattern::benchSinglePatternAlgo(
     std::string text = util::generateStringFromAlphabet(textSize, alphabet);
     std::string pattern = util::generateStringFromAlphabet(patternSize, alphabet);
     
-    BENCHMARK("findString") {
-        findString(text, pattern);
-    };
+    findString(text, pattern);
 }
 
-void benchmark::multipattern::benchMultiPatternAlgo(
+void benchmark::runMultiPatternAlgo(
     AlgoFuncType2 findAllStrings, 
     const std::string& alphabet,
     unsigned textSize,
@@ -30,7 +26,5 @@ void benchmark::multipattern::benchMultiPatternAlgo(
     for (size_t i = 0; i < patternCount; i++)
         patterns.insert(util::generateStringFromAlphabet(patternSize, alphabet));
 
-    BENCHMARK("findAllStrings") {
-        findAllStrings(text, patterns);
-    };
+    findAllStrings(text, patterns);
 }

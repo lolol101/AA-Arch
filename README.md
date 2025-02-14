@@ -14,6 +14,8 @@ This project's goal is to implement several string-searching algorithms. The fol
 
 Now implemented:
 1. The Aho-Korasik algorithm
+2. The Knuth-Morris-Pratt algorithm
+3. The Rabin-Karp algorithm
 
 ## Build
 

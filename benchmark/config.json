@@ -1,5 +1,11 @@
 {
-    "KnuthMorrisPrattScenario": [
+    "AhoCorasik": [
+        [10, 100, 10, 2]
+    ],
+    "KnuthMorrisPratt": [
+        [10, 10, 2]
+    ],
+    "RabinCarp": [
         [10, 10, 2]
     ]
 }

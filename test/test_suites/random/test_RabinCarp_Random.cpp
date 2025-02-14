@@ -9,7 +9,7 @@
 TEST_CASE("Rabin-Carp stress test: digits, large text, few short patterns", "[stress][rabin-carp]") {
     test::singlepattern::test_findSingleString_RandomFill(
         algo::findStringRabinCarp,
-        test::util::alphabetDigits,
+        util::alphabetDigits,
         100'000,
         10,
         5
@@ -19,7 +19,7 @@ TEST_CASE("Rabin-Carp stress test: digits, large text, few short patterns", "[st
 TEST_CASE("Rabin-Carp stress test: digits, large text, many short patterns", "[stress][rabin-carp]") {
     test::singlepattern::test_findSingleString_RandomFill(
         algo::findStringRabinCarp,
-        test::util::alphabetDigits,
+        util::alphabetDigits,
         100'000,
         1'000,
         5

@@ -3,14 +3,17 @@ project(AA-Arch VERSION 0.1.0 LANGUAGES C CXX)
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
+set(BENCHMARK_ENABLE_TESTING OFF)
 
 include_directories(include)
 include_directories(util)
-include_directories(third_party/catch_2/src)
+include_directories(third_party/catch_2/include)
 include_directories(third_party/json/include)
+include_directories(third_party/benchmark/include)
 
 # TODO: add flag for test compilation
 add_subdirectory(third_party/catch2/)
+add_subdirectory(third_party/benchmark/)
 
 add_library(StringLib STATIC 
     src/AhoCorasick.cpp
