@@ -72,7 +72,7 @@ jobs:
 
       - name: Benchmark
         run: |
-          ./build/Benchmark --benchmark_format=json > ./benchmark/results.json
+          ./build/Benchmark --benchmark_format=json > ../benchmark/results.json
 
   deploy:
     needs: test
