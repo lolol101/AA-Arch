@@ -16,12 +16,12 @@ json benchmark::loadConfig(const std::string& filename) {
     return config;
 }
 
-void benchmark::benchmarkTimeAhoCorasik(benchmark::State& state) {
+template <typename FuncType1, typename FuncType2, typename FuncType3>
+void benchmark::runTemplateTimeBenchmark(benchmark::State& state, FuncType1 runScenario, FuncType2 runAlgo, FuncType3 algoFunc, const std::string algoName) {
     std::vector<double> timings;
     for (auto _ : state) {
         auto start = std::chrono::high_resolution_clock::now();
-        benchmark::runMultiPatternScenario(benchmark::runMultiPatternAlgo, algo::findAllStringsAhoCorasick,
-                                            "AhoCorasik", config);
+        runScenario(runAlgo, algoFunc, algoName, config);
         auto end = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> duration = end - start;
         timings.push_back(duration.count() * 1e6);
@@ -40,57 +40,17 @@ void benchmark::benchmarkTimeAhoCorasik(benchmark::State& state) {
         state.counters["min_time_us"] = min_time;
         state.counters["max_time_us"] = max_time;
     }
+}
+
+void benchmark::benchmarkTimeAhoCorasik(benchmark::State& state) {
+    runTemplateTimeBenchmark(state, benchmark::runMultiPatternScenario, benchmark::runMultiPatternAlgo, algo::findAllStringsAhoCorasick, "AhoCorasik");
 }
 
 void benchmark::benchmarkTimeKnuthMorrisPratt(benchmark::State& state) {
-    std::vector<double> timings;
-    for (auto _ : state) {
-        auto start = std::chrono::high_resolution_clock::now();
-        benchmark::runSinglePatternScenario(benchmark::runSinglePatternAlgo, algo::findStringKnuthMorrisPratt,
-                                            "KnuthMorrisPratt", config);
-        auto end = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<double> duration = end - start;
-        timings.push_back(duration.count() * 1e6);
-    }
-
-    if (!timings.empty()) {
-        std::sort(timings.begin(), timings.end());
-        double sum = std::accumulate(timings.begin(), timings.end(), 0.0);
-        double avg = sum / timings.size();
-        double median = timings[timings.size() / 2];
-        double min_time = timings.front();
-        double max_time = timings.back();
-
-        state.counters["avg_time_us"] = avg;
-        state.counters["median_time_us"] = median;
-        state.counters["min_time_us"] = min_time;
-        state.counters["max_time_us"] = max_time;
-    }
+    runTemplateTimeBenchmark(state, benchmark::runSinglePatternScenario, benchmark::runSinglePatternAlgo, algo::findStringKnuthMorrisPratt, "RabinCarp");
 }
 
 void benchmark::benchmarkTimeRabinCarp(benchmark::State& state) {
-    std::vector<double> timings;
-    for (auto _ : state) {
-        auto start = std::chrono::high_resolution_clock::now();
-        benchmark::runSinglePatternScenario(benchmark::runSinglePatternAlgo, algo::findStringRabinCarp,
-                                            "RabinCarp", config);
-        auto end = std::chrono::high_resolution_clock::now();
-        std::chrono::duration<double> duration = end - start;
-        timings.push_back(duration.count() * 1e6);
-    }
-
-    if (!timings.empty()) {
-        std::sort(timings.begin(), timings.end());
-        double sum = std::accumulate(timings.begin(), timings.end(), 0.0);
-        double avg = sum / timings.size();
-        double median = timings[timings.size() / 2];
-        double min_time = timings.front();
-        double max_time = timings.back();
-
-        state.counters["avg_time_us"] = avg;
-        state.counters["median_time_us"] = median;
-        state.counters["min_time_us"] = min_time;
-        state.counters["max_time_us"] = max_time;
-    }
+    runTemplateTimeBenchmark(state, benchmark::runSinglePatternScenario, benchmark::runSinglePatternAlgo, algo::findStringRabinCarp, "RabinCarp");
 }
 
