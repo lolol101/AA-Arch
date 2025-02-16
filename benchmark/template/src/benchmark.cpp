@@ -19,12 +19,12 @@ json benchmark::loadConfig(const std::string& filename) {
 void benchmark::benchmarkTimeAhoCorasik(benchmark::State& state) {
     std::vector<double> timings;
     for (auto _ : state) {
-            auto start = std::chrono::high_resolution_clock::now();
-            benchmark::runMultiPatternScenario(benchmark::runMultiPatternAlgo, algo::findAllStringsAhoCorasick,
-                                                "AhoCorasik", config);
-            auto end = std::chrono::high_resolution_clock::now();
-            std::chrono::duration<double> duration = end - start;
-            timings.push_back(duration.count() * 1e6);
+        auto start = std::chrono::high_resolution_clock::now();
+        benchmark::runMultiPatternScenario(benchmark::runMultiPatternAlgo, algo::findAllStringsAhoCorasick,
+                                            "AhoCorasik", config);
+        auto end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> duration = end - start;
+        timings.push_back(duration.count() * 1e6);
     }
 
     if (!timings.empty()) {
@@ -45,12 +45,12 @@ void benchmark::benchmarkTimeAhoCorasik(benchmark::State& state) {
 void benchmark::benchmarkTimeKnuthMorrisPratt(benchmark::State& state) {
     std::vector<double> timings;
     for (auto _ : state) {
-            auto start = std::chrono::high_resolution_clock::now();
-            benchmark::runSinglePatternScenario(benchmark::runSinglePatternAlgo, algo::findStringKnuthMorrisPratt,
-                                                "KnuthMorrisPratt", config);
-            auto end = std::chrono::high_resolution_clock::now();
-            std::chrono::duration<double> duration = end - start;
-            timings.push_back(duration.count() * 1e6);
+        auto start = std::chrono::high_resolution_clock::now();
+        benchmark::runSinglePatternScenario(benchmark::runSinglePatternAlgo, algo::findStringKnuthMorrisPratt,
+                                            "KnuthMorrisPratt", config);
+        auto end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> duration = end - start;
+        timings.push_back(duration.count() * 1e6);
     }
 
     if (!timings.empty()) {

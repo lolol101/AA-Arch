@@ -1,8 +1,11 @@
 cmake_minimum_required(VERSION 3.2.0)
 project(AA-Arch1 VERSION 0.1.0 LANGUAGES C CXX)
 
-include_directories(../util tasks/ template/include/ 
-                    ../third_party/json/include/ ../third_party/benchmark/include)
+include_directories(
+    ../util 
+    tasks/ 
+    template/include/ 
+    )
 
 add_executable(Benchmark
     template/src/benchAlgorithm.cpp
