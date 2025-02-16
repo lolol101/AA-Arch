@@ -80,7 +80,11 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: benchmark-config
-          path: benchmark/config.json
+          path: benchmark/
+
+      - name: Debug - List active directories
+        run: |
+          ls -R ./
 
       - name: Benchmark
         run: |
