@@ -15,9 +15,9 @@ json benchmark::loadConfig(const std::string& filename) {
     file >> config;
     return config;
 }
-
+namespace benchmark {
 template <typename FuncType1, typename FuncType2, typename FuncType3>
-void benchmark::runTemplateTimeBenchmark(benchmark::State& state, FuncType1 runScenario, FuncType2 runAlgo, FuncType3 algoFunc, const std::string algoName) {
+void runTemplateTimeBenchmark(benchmark::State& state, FuncType1 runScenario, FuncType2 runAlgo, FuncType3 algoFunc, const std::string algoName) {
     std::vector<double> timings;
     for (auto _ : state) {
         auto start = std::chrono::high_resolution_clock::now();
@@ -40,6 +40,7 @@ void benchmark::runTemplateTimeBenchmark(benchmark::State& state, FuncType1 runS
         state.counters["min_time_us"] = min_time;
         state.counters["max_time_us"] = max_time;
     }
+}
 }
 
 void benchmark::benchmarkTimeAhoCorasik(benchmark::State& state) {
