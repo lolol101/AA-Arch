@@ -9,11 +9,15 @@
 using json = nlohmann::json;
 
 namespace benchmark {
-/// @brief Loads config file and exits programm in case of error
+// Loads config file and exits program in case of error.
 json loadConfig(const std::string& filename);
 
-// Functions measure the time according to the scenario in config.json
+// Measures Aho-Corasick algorithm execution time according to the scenario in config.json, saving results to state.
 void benchmarkTimeAhoCorasik(benchmark::State& state);
+
+/// Measures Knuth-Morris-Pratt algorithm execution time according to the scenario in config.json, saving results to state.
 void benchmarkTimeKnuthMorrisPratt(benchmark::State& state);
+
+// Measures Rabin-Carp algorithm execution time according to the scenario in config.json, saving results to state.
 void benchmarkTimeRabinCarp(benchmark::State& state);
 }
