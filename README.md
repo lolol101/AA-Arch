@@ -54,3 +54,11 @@ target_link_libraries(Test PRIVATE StringLib)
 ```
 "path_to_lib/AA-Arch/include/"
 ```
+
+## Launching the benchmark
+
+```
+./build/Benchmark --benchmark_format=json > ./benchmark/results.json
+```
+
+See benchmark results in benchmark/results.json
