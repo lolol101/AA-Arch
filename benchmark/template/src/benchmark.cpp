@@ -107,6 +107,10 @@ void benchmark::benchmarkTimeRabinCarp(benchmark::State& state) {
     runTemplateTimeBenchmark(state, benchmark::runSinglePatternScenario, benchmark::runSinglePatternAlgo, algo::findStringRabinCarp, "RabinCarp");
 }
 
+void benchmark::benchmarkTimeBoyerMoore(benchmark::State& state) {
+    runTemplateTimeBenchmark(state, benchmark::runSinglePatternScenario, benchmark::runSinglePatternAlgo, algo::findStringBoyerMoore, "RabinCarp");
+}
+
 void benchmark::benchmarkMemoryAhoCorasik(benchmark::State& state) {
     runTemplateMemoryBenchmark(state, benchmark::runMultiPatternScenario, benchmark::runMultiPatternAlgo, algo::findAllStringsAhoCorasick, "AhoCorasik");
 }

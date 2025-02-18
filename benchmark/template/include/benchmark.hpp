@@ -21,6 +21,9 @@ void benchmarkTimeKnuthMorrisPratt(benchmark::State& state);
 // Measures Rabin-Carp algorithm execution time according to the scenario in config.json, saving results to state.
 void benchmarkTimeRabinCarp(benchmark::State& state);
 
+// Measures Boyer-Moore algorithm execution time according to the scenario in config.json, saving results to state.
+void benchmarkTimeBoyerMoore(benchmark::State& state);
+
 // Measures Aho-Corasick algorithm execution time according to the scenario in config.json, saving results to state.
 void benchmarkMemoryAhoCorasik(benchmark::State& state);
 
