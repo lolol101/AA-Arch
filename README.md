@@ -23,10 +23,10 @@ To build the project in Linux, use following terminal commands from project dire
 ```
 cmake .
 make StringLib
+```
+To verify installation correctness, run tests after build:
+```
 make Test
-```
-To run tests after build:
-```
 ./build/Test
 ```
 
@@ -35,9 +35,9 @@ To run specific tests (e.g. "aho-corasik" or "unit"; check test directory README
 ./build/Test [aho-corasik]
 ```
 
-## Integration of library
-Method using Git and Cmake:
-* Add submodule
+## Integrating the library into your project
+Using Git and Cmake:
+* Add the library as your project submodule
 
 ```
 git add submodule https://github.com/lolol101/AA-Arch/
@@ -47,10 +47,10 @@ git submodule update --init
 * After that add to your Cmakelists.txt:
 ```
 add_subdirectory(path_to_lib/AA-Arch)
-target_link_libraries(Test PRIVATE StringLib)
+target_link_libraries(YourProjectTarget PRIVATE StringLib)
 ```
 
-* Then you can use library header files from: 
+* Now you can use library header files from the following path in your includes:
 ```
 "path_to_lib/AA-Arch/include/"
 ```
@@ -63,7 +63,7 @@ target_link_libraries(Test PRIVATE StringLib)
 
 See benchmark results in benchmark/results.json
 
-## Library contribution guide
+<!-- ## Library contribution guide
 
 Starting point: you have your implementation of the algorithm in source/header files, e.g. "MyAlgo.hpp" and "MyAlgo.cpp".
 
@@ -79,6 +79,9 @@ add_library(StringLib STATIC
     src/MyAlgo.cpp
     ...
 )
-```
+``` -->
 
 Now your algorithm can be used in standard way like the rest of the library.
+
+## Library contribution guide:
+See [here](docs/ContributionGuide.md).
