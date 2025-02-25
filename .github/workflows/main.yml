@@ -28,13 +28,40 @@ jobs:
       - name: Build library from source
         run: |
           cmake . && make all
-          
-      - name: Testing library
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: build/
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+          path: build/
+
+      - name: Testing library - unit tests
         run: |
-          ./build/Test
+          chmod +x ./build/Test
+          ./build/Test [unit]
+    
+      - name: Testing library - corner cases
+        run: |
+          chmod +x ./build/Test
+          ./build/Test [corner] # TODO: -r compact? # TODO: -s for performance tests
+      
+      - name: Testing library - stress tests
+        run: |
+          chmod +x ./build/Test
+          ./build/Test [stress]
 
   deploy:
-    needs: build
+    needs: test
     if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:

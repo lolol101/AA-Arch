@@ -5,12 +5,13 @@ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/build)
 
 include_directories(include)
+include_directories(util)
 include_directories(third_party/catch_2/src)
 
 # TODO: add flag for test compilation
 add_subdirectory(third_party/catch2/)
 
-add_library(StringLib STATIC src/algorithm.cpp)
-add_executable(Test test/test.cpp)
+add_library(StringLib STATIC src/AhoCorasick.cpp)
+add_library(Util STATIC util/util.cpp)
 
-target_link_libraries(Test PRIVATE Catch2::Catch2WithMain)
+add_subdirectory(test)
