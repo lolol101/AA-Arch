@@ -1,12 +1,7 @@
 # Contribution guide for the project
 
 ## Requirements
-Please ensure that following requirements are installed on your system:
-
-- C++20-supporting compiler, such as g++
-- CMake 3.2.0+
-- git 
-
+Please ensure that all [original project dependencies](../README.md#project-requirements) are installed on your end.
 
 ## Before you begin
 ### Codestyle

@@ -17,6 +17,13 @@ To be implemented:
 5. Longest Common Substring (LCS)
 6. Suffix Tree searching algorithm
 
+## Project requirements
+Please ensure that following requirements are installed on your system:
+
+- C++20-supporting compiler, such as g++
+- CMake 3.2.0+
+- git 
+
 ## Build
 
 To build the project in Linux, use following terminal commands from project directory:
