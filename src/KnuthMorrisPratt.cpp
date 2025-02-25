@@ -6,9 +6,9 @@ void algo::util::kmp::calculateLPSArray(const std::string& pattern, std::vector<
         return;
     }
     lps.resize(pattern.length());
-    lps[0] = 0;
+    lps[0] = 0; // setting starting value
 
-    for (int i = 1, matchSize = 0; i < pattern.size();) {
+    for (int i = 1, matchSize = 0; i < pattern.size();) { // setting up of the LPS array
         if (pattern[i] == pattern[matchSize])
             lps[i++] = ++matchSize;
         else if (matchSize != 0)
@@ -26,7 +26,7 @@ std::vector<size_t> algo::findStringKnuthMorrisPratt(const std::string& text, co
 
     util::kmp::calculateLPSArray(pattern, lps);
 
-    for (int i = 0, j = 0; i < text.size();) {
+    for (int i = 0, j = 0; i < text.size();) { // getting answer using lps
         if (pattern[j] == text[i]) {
             ++i;
             ++j;
