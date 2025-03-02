@@ -20,6 +20,7 @@ add_executable(Test
     test_suites/unit/test_BoyerMoore_Unit.cpp
     test_suites/unit/test_KnuthMorrisPratt_Unit.cpp
     test_suites/unit/test_RabinCarp_Unit.cpp
+    test_suites/unit/test_ZFunction_Unit.cpp
 
     template/src/corner_case.cpp
     template/src/random_test.cpp

@@ -48,3 +48,11 @@ An algorithm of searching substring in a string using suffix tree.
 Time - O(SuffixTreeBuilding) + O(n) \
 Space - O(n|$\Sigma$|) \
 Where n is the length of the text.
+
+## 7. Z-function
+
+The Z-function algorithm calculates an array where each element represents the length of the longest substring starting from that position that matches the prefix of the string. It allows you to find all occurrences of a string in another string.
+
+Time - O(n + m) \
+Space - O(n + m) \
+Where n, m are the length of the strings.
