@@ -23,6 +23,7 @@ add_library(StringLib STATIC
     src/BoyerMoore.cpp
     src/KnuthMorrisPratt.cpp
     src/RabinCarp.cpp
+    src/LCS.cpp
     )
 
 add_library(Util STATIC util/util.cpp)
