@@ -6,3 +6,4 @@
 #include "RabinCarp.hpp"
 #include "LCS.hpp"
 #include "ZFunction.hpp"
+#include "Naive.hpp"

@@ -119,6 +119,10 @@ void benchmark::benchmarkTimeZFunction(benchmark::State& state) {
     runTemplateTimeBenchmark(state, benchmark::runSinglePatternScenario, benchmark::runSinglePatternAlgo, algo::findStringZFunction, "ZFunction");
 }
 
+void benchmark::benchmarkTimeNaive(benchmark::State& state) {
+    runTemplateTimeBenchmark(state, benchmark::runSinglePatternScenario, benchmark::runSinglePatternAlgo, algo::findStringNaive, "Naive");
+}
+
 
 void benchmark::benchmarkMemoryAhoCorasik(benchmark::State& state) {
     runTemplateMemoryBenchmark(state, benchmark::runMultiPatternScenario, benchmark::runMultiPatternAlgo, algo::findAllStringsAhoCorasick, "AhoCorasik");
@@ -142,4 +146,8 @@ void benchmark::benchmarkMemoryLCS(benchmark::State& state) {
 
 void benchmark::benchmarkMemoryZFunction(benchmark::State& state) {
     runTemplateMemoryBenchmark(state, benchmark::runSinglePatternScenario, benchmark::runSinglePatternAlgo, algo::findStringZFunction, "ZFunction");
+}
+
+void benchmark::benchmarkMemoryNaive(benchmark::State& state) {
+    runTemplateMemoryBenchmark(state, benchmark::runSinglePatternScenario, benchmark::runSinglePatternAlgo, algo::findStringNaive, "Naive");
 }

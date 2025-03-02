@@ -51,8 +51,15 @@ Where n is the length of the text.
 
 ## 7. Z-function
 
-The Z-function algorithm calculates an array where each element represents the length of the longest substring starting from that position that matches the prefix of the string. It allows you to find all occurrences of a string in another string.
+The Z-function algorithm calculates an array where each element represents the length of the longest substring starting from that position that matches the prefix of the string.
 
 Time - O(n + m) \
 Space - O(n + m) \
 Where n, m are the length of the strings.
+
+## 8. Naive
+
+The naive algorithm finds all occurrences of a substring within a larger string by checking every possible position where the substring could start. It iterates through the main string and compares each segment of the same length as the substring to see if they match.
+Time - O(n * m)
+Space - O(n)
+Where n is the length of string and m is the length of substring.

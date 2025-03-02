@@ -25,6 +25,7 @@ add_library(StringLib STATIC
     src/RabinCarp.cpp
     src/LCS.cpp
     src/ZFunction.cpp
+    src/Naive.cpp
     )
 
 add_library(Util STATIC util/util.cpp)
