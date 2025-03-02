@@ -24,6 +24,12 @@ void benchmarkTimeRabinCarp(benchmark::State& state);
 // Measures Boyer-Moore algorithm execution time according to the scenario in config.json, saving results to state.
 void benchmarkTimeBoyerMoore(benchmark::State& state);
 
+// Measures LCS algorithm execution time according to the scenario in config.json, saving results to state.
+void benchmarkTimeLCS(benchmark::State& state);
+
+// Measures Z-function algorithm execution time according to the scenario in config.json, saving results to state.
+void benchmarkTimeZFunction(benchmark::State& state);
+
 // Measures Aho-Corasick algorithm execution time according to the scenario in config.json, saving results to state.
 void benchmarkMemoryAhoCorasik(benchmark::State& state);
 
@@ -35,4 +41,11 @@ void benchmarkMemoryRabinCarp(benchmark::State& state);
 
 // Measures Boyer-Moore algorithm execution time according to the scenario in config.json, saving results to state.
 void benchmarkMemoryBoyerMoore(benchmark::State& state);
+
+// Measures LCS algorithm execution time according to the scenario in config.json, saving results to state.
+void benchmarkMemoryLCS(benchmark::State& state);
+
+// Measures Z-function algorithm execution time according to the scenario in config.json, saving results to state.
+void benchmarkMemoryZFunction(benchmark::State& state);
+
 }
