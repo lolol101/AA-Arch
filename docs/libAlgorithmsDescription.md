@@ -48,4 +48,3 @@ An algorithm of searching substring in a string using suffix tree.
 Time - O(SuffixTreeBuilding) + O(n) \
 Space - O(n|$\Sigma$|) \
 Where n is the length of the text.
-

@@ -4,7 +4,7 @@ Contributors: Nazarov Maksim, Okorokov Nikita.
 
 ## Description
 
-This project's goal is to implement several string-searching algorithms. The following algorithms are intended to be implemented:
+Goal of this project is to implement several string-searching algorithms. The following algorithms are intended to be implemented:
 1. The Aho-Korasik algorithm
 2. The Knuth-Morris-Pratt algorithm
 3. The Rabin-Karp algorithm
@@ -12,8 +12,10 @@ This project's goal is to implement several string-searching algorithms. The fol
 5. Longest Common Substring (LCS)
 6. Suffix Tree searching algorithm
 
-Now implemented:
+Currently implemented:
 1. The Aho-Korasik algorithm
+2. The Knuth-Morris-Pratt algorithm
+3. The Rabin-Karp algorithm
 
 ## Build
 
@@ -28,7 +30,7 @@ Test run after build:
 ./build/Test
 ```
 
-Specific Test run (e.g. "aho-corasik"):
+Specific Test run (e.g. "aho-corasik" or "unit"):
 ```
 ./build/Test [aho-corasik]
 ```
@@ -42,13 +44,21 @@ git add submodule https://github.com/lolol101/AA-Arch/
 git submodule update --init
 ```
 
-* And after in Cmakelists.txt:
+* After that add to your Cmakelists.txt:
 ```
 add_subdirectory(path_to_lib/AA-Arch)
 target_link_libraries(Test PRIVATE StringLib)
 ```
 
-* So after use library using header's files from: 
+* Then you can use library header files from: 
 ```
 "path_to_lib/AA-Arch/include/"
 ```
+
+## Launching the benchmark
+
+```
+./build/Benchmark --benchmark_format=json > ./benchmark/results.json
+```
+
+See benchmark results in benchmark/results.json

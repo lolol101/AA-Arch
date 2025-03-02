@@ -24,33 +24,38 @@ std::string util::generateStringFromAlphabet(size_t length, const std::string &a
     return util::generateStringFromAlphabet(length, std::set<char>(alphabet.begin(), alphabet.end()));
 }
 
-bool util::isResultValid(const std::string &text, const std::set<std::string> &patterns, std::vector<std::vector<size_t>>& result)
+bool util::isResultValid_MultiPattern(const std::string &text, const std::set<std::string> &patterns, const std::vector<std::vector<size_t>> &result)
 {
     if (result.size() != patterns.size()) return false; // TODO: maybe exceptions?
 
     auto it = patterns.begin(); 
     for (size_t i = 0; i < patterns.size(); i++) {
         const std::string &pattern = *it;
-        std::vector<size_t> mockOccurences;
-        for (size_t pos = 0; pos <= text.size() - pattern.size(); pos++) {
-            if (pattern == std::string_view(text.data() + pos, pattern.size())) {
-                mockOccurences.push_back(pos);
-            }
-        }
-        // std::cerr << "Pattern: " << pattern << '\n';
-
-        // std::cerr << "Mock occurences: ";
-        // for (auto v: mockOccurences) std::cerr << v << ' ';
-        // std::cerr << '\n';
-
-        // std::cerr << "Result: ";
-        // for (auto v : result[i]) {
-        //     std::cerr << v << ' ';
-        // }
-        // std::cerr << '\n';
-        if (mockOccurences != result[i]) return false;
+        if (!util::isResultValid_SinglePattern(text, pattern, result[i])) return false;
         std::advance(it, 1);
     }
 
     return true;
+}
+
+bool util::isResultValid_SinglePattern(const std::string &text, const std::string &pattern, const std::vector<size_t>& result) {
+    std::vector<size_t> mockOccurences;
+    for (size_t pos = 0; pos <= text.size() - pattern.size(); pos++) {
+        if (pattern == std::string_view(text.data() + pos, pattern.size())) {
+            mockOccurences.push_back(pos);
+        }
+    }
+    if (mockOccurences != result) {
+        std::cout << "Checking text: " << text << '\n';
+        std::cout << "Checking pattern: " << pattern << '\n';
+        std::cout << "Expected ";
+        for (auto res: mockOccurences) std::cout << res << ' ';
+        std::cout << '\n';
+    
+        std::cout << "Got ";
+        for (auto res: result) std::cout << res << ' ';
+        std::cout << '\n';
+    }
+    
+    return mockOccurences == result;
 }
