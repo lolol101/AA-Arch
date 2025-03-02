@@ -111,12 +111,25 @@ void benchmark::benchmarkTimeBoyerMoore(benchmark::State& state) {
     runTemplateTimeBenchmark(state, benchmark::runSinglePatternScenario, benchmark::runSinglePatternAlgo, algo::findStringBoyerMoore, "RabinCarp");
 }
 
+void benchmark::benchmarkTimeLCS(benchmark::State& state) {
+    runTemplateTimeBenchmark(state, benchmark::runSinglePatternScenario, benchmark::runSinglePatternAlgo, algo::findStringLCS, "LCS");
+}
+
+void benchmark::benchmarkTimeZFunction(benchmark::State& state) {
+    runTemplateTimeBenchmark(state, benchmark::runSinglePatternScenario, benchmark::runSinglePatternAlgo, algo::findStringZFunction, "ZFunction");
+}
+
+void benchmark::benchmarkTimeNaive(benchmark::State& state) {
+    runTemplateTimeBenchmark(state, benchmark::runSinglePatternScenario, benchmark::runSinglePatternAlgo, algo::findStringNaive, "Naive");
+}
+
+
 void benchmark::benchmarkMemoryAhoCorasik(benchmark::State& state) {
     runTemplateMemoryBenchmark(state, benchmark::runMultiPatternScenario, benchmark::runMultiPatternAlgo, algo::findAllStringsAhoCorasick, "AhoCorasik");
 }
 
 void benchmark::benchmarkMemoryKnuthMorrisPratt(benchmark::State& state) {
-    runTemplateMemoryBenchmark(state, benchmark::runSinglePatternScenario, benchmark::runSinglePatternAlgo, algo::findStringKnuthMorrisPratt, "RabinCarp");
+    runTemplateMemoryBenchmark(state, benchmark::runSinglePatternScenario, benchmark::runSinglePatternAlgo, algo::findStringKnuthMorrisPratt, "KnuthMorrisPratt");
 }
 
 void benchmark::benchmarkMemoryRabinCarp(benchmark::State& state) {
@@ -124,5 +137,17 @@ void benchmark::benchmarkMemoryRabinCarp(benchmark::State& state) {
 }
 
 void benchmark::benchmarkMemoryBoyerMoore(benchmark::State& state) {
-    runTemplateMemoryBenchmark(state, benchmark::runSinglePatternScenario, benchmark::runSinglePatternAlgo, algo::findStringRabinCarp, "RabinCarp");
+    runTemplateMemoryBenchmark(state, benchmark::runSinglePatternScenario, benchmark::runSinglePatternAlgo, algo::findStringBoyerMoore, "BoyerMoore");
+}
+
+void benchmark::benchmarkMemoryLCS(benchmark::State& state) {
+    runTemplateMemoryBenchmark(state, benchmark::runSinglePatternScenario, benchmark::runSinglePatternAlgo, algo::findStringLCS, "LCS");
+}
+
+void benchmark::benchmarkMemoryZFunction(benchmark::State& state) {
+    runTemplateMemoryBenchmark(state, benchmark::runSinglePatternScenario, benchmark::runSinglePatternAlgo, algo::findStringZFunction, "ZFunction");
+}
+
+void benchmark::benchmarkMemoryNaive(benchmark::State& state) {
+    runTemplateMemoryBenchmark(state, benchmark::runSinglePatternScenario, benchmark::runSinglePatternAlgo, algo::findStringNaive, "Naive");
 }

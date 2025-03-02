@@ -23,6 +23,9 @@ add_library(StringLib STATIC
     src/BoyerMoore.cpp
     src/KnuthMorrisPratt.cpp
     src/RabinCarp.cpp
+    src/LCS.cpp
+    src/ZFunction.cpp
+    src/Naive.cpp
     )
 
 add_library(Util STATIC util/util.cpp)

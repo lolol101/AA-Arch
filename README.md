@@ -11,11 +11,13 @@ Currently implemented:
 2. The Knuth-Morris-Pratt algorithm
 3. The Rabin-Karp algorithm
 4. The Boyer-Moore algorithm
+5. Z-function
+6. Longest Common Substring (LCS)
+7. Naive
 
 To be implemented:
 
-5. Longest Common Substring (LCS)
-6. Suffix Tree searching algorithm
+8. Suffix Tree searching algorithm
 
 ## Project requirements
 Please ensure that following requirements are installed on your system:
