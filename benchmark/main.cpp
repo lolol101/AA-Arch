@@ -3,7 +3,7 @@
 BENCHMARK(benchmark::benchmarkTimeAhoCorasik);
 BENCHMARK(benchmark::benchmarkTimeKnuthMorrisPratt);
 BENCHMARK(benchmark::benchmarkTimeRabinCarp);
-BENCHMARK(benchmark::benchmarkMemoryBoyerMoore);
+BENCHMARK(benchmark::benchmarkTimeBoyerMoore);
 BENCHMARK(benchmark::benchmarkMemoryAhoCorasik);
 BENCHMARK(benchmark::benchmarkMemoryKnuthMorrisPratt);
 BENCHMARK(benchmark::benchmarkMemoryBoyerMoore);

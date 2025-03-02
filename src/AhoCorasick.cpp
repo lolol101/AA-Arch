@@ -17,8 +17,8 @@ namespace algo::util::ahocorasick {
     /// @param letter char symbol which represents edge name to move to the next state.
     /// @param vertexes container where the Bor (tree) is located.
     int moveToNextState(int cur, int letter, std::vector<BorTreeNode>& vertexes) { 
-        if (vertexes[cur].nextEdgeStates.find(letter) == vertexes[cur].nextEdgeStates.end()) {
-            if (vertexes[cur].childs.find(letter) != vertexes[cur].childs.end())
+        if (!vertexes[cur].nextEdgeStates.contains(letter)) {
+            if (vertexes[cur].childs.contains(letter))
                 vertexes[cur].nextEdgeStates[letter] = vertexes[cur].childs[letter];
             else if (cur == 0)
                 vertexes[cur].nextEdgeStates[letter] = 0;
@@ -49,12 +49,12 @@ namespace algo::util::ahocorasick {
     /// @param vertexes container where the Bor (tree) is located.
     /// @note Only "addString" function is designed to change "deep" and "stringNum" variable values.
     void addString(const std::string &pattern, int index, std::vector<BorTreeNode>& vertexes) {
-        if (pattern != "") {
+        if (!pattern.empty()) {
             int cur = 0;
             int deep = 0;
             for (int i = 0; i < pattern.size(); ++i, ++deep) {
                 int letter = pattern[i];
-                if (vertexes[cur].childs.find(letter) == vertexes[cur].childs.end()) {
+                if (!vertexes[cur].childs.contains(letter)) {
                     vertexes.emplace_back(cur, letter);
                     vertexes[cur].childs[letter] = vertexes.size() - 1;
                 }
