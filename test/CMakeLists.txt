@@ -10,6 +10,7 @@ add_executable(Test
     test_suites/corner_case/test_RabinCarp_Corner.cpp
     test_suites/corner_case/test_LCS_Corner.cpp
     test_suites/corner_case/test_ZFunction_Corner.cpp
+    test_suites/corner_case/test_Naive_Corner.cpp
 
     test_suites/random/testAhoCorasickRandom.cpp
     test_suites/random/test_BoyerMoore_Random.cpp
@@ -17,6 +18,7 @@ add_executable(Test
     test_suites/random/test_RabinCarp_Random.cpp
     test_suites/random/test_LCS_Random.cpp
     test_suites/random/test_ZFunction_Random.cpp
+    test_suites/random/test_Naive_Random.cpp
 
     test_suites/unit/testAhoCorasickUnit.cpp
     test_suites/unit/test_BoyerMoore_Unit.cpp
