@@ -47,6 +47,9 @@ namespace algo {
     /// @param text string to search for substring in.
     /// @param pattern a string which is needed to be found in text.
     std::vector<std::size_t> findStringZFunction(const std::string &text, const std::string& pattern) {
+        if (text.empty() || pattern.empty()) {
+            return {};
+        }
         char sep = util::z::findSeparator(text, pattern);
         std::string combinedString = pattern + sep + text;
         std::vector <int> z = util::z::calculateZFunction(combinedString);
